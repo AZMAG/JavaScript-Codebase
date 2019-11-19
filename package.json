@@ -1,0 +1,23 @@
+{
+  "name": "magcore",
+  "version": "0.1.0",
+  "description": "MAG core repository",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AZMAG/map-mag-core-js"
+  },
+  "keywords": [
+    "MAG"
+  ],
+  "author": "MAG Regional Analytics Devision (http://www.azmag.gov/About-Us/Divisions/Regional-Analytics-Division/)",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^1.0.4",
+    "grunt-banner": "^0.6.0",
+    "grunt-bump": "^0.8.0",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-requirejs": "^1.0.0",
+    "grunt-text-replace": "^0.4.0",
+    "load-grunt-tasks": "^5.1.0"
+  }
+}
