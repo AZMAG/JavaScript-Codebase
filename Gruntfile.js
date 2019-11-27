@@ -17,6 +17,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         config: {
             out: 'dist',
+            src: 'src',
             demos: 'demos',
             cssSource: 'src/css'
         },
@@ -48,7 +49,7 @@ module.exports = function (grunt) {
         },
         bump: {
             options: {
-                files: ['package.json', 'src/js/main.js'],
+                files: ['package.json', '<%=config.src%>/js/main.js'],
                 updateConfigs: ['pkg'],
                 commit: false,
                 createTag: false,
@@ -62,7 +63,7 @@ module.exports = function (grunt) {
         requirejs: {
             debug: {
                 options: {
-                    baseUrl: 'src/js',
+                    baseUrl: '<%=config.src%>/js',
                     out: './<%=config.out%>/js/<%= pkg.name %>.js',
                     // allow dependencies to be resolved but don't include in output (empty:)
                     paths: paths,
@@ -79,7 +80,7 @@ module.exports = function (grunt) {
             },
             release: {
                 options: {
-                    baseUrl: 'src/js',
+                    baseUrl: '<%=config.src%>/js',
                     // allow dependencies to be resolved but don't include in output (empty:)
                     paths: paths,
                     // but don't include them in the main build
@@ -104,8 +105,8 @@ module.exports = function (grunt) {
         },       
         replace: {
             src: {
-                src: ['src/js/main.js'],
-                dest: ['src/js/main.js'],
+                src: ['<%=config.src%>/js/main.js'],
+                dest: ['<%=config.src%>/js/main.js'],
                 replacements: [{
                     from: VERSION_REGEXP,
                     to: '<%=pkg.version%>'
@@ -114,22 +115,37 @@ module.exports = function (grunt) {
         },
         clean: {
             release: ['./<%=config.out%>'],
-            debug: ['<%=config.out%>/js/magcore.*']
+            debug: ['<%=config.out%>/js/magcore.*'],
+            docs: ['docs']
+        },
+        jsdoc: {
+            release: {
+                src: ['<%=config.src%>/js/**/*.js'],
+                options: {
+                    destination: './docs',
+                    configure: './jsdoc.conf.json',
+                    template: './node_modules/docdash'
+                }
+            }
         },
         watch: {
             options: {
-                livereload: 35729                
+                livereload: 35719                
             },
             demo: {
-                files: ['./src/sass/**/*.sass', './src/js/**/*.js', './src/js/**/*.html',                
+                files: ['./<%=config.src%>/sass/**/*.sass', './<%=config.src%>/js/**/*.js', './<%=config.src%>/js/**/*.html',                
                 './demo/sass/**/*.sass', './demo/js/**/*.js', './demo/js/**/*.html', './demo/index.html'],
                 tasks: ['debug']
+            },
+            docs: {
+                files: ['<%= config.src%>/js/**/*.js', './jsdoc.conf.json', './readme.md'],
+                tasks: ['clean:docs', 'jsdoc']
             }
         },
         connect: {
             options: {
                 hostname: 'localhost',
-                livereload: 35729,
+                livereload: 35719,
                 base: './'
             },            
             demo: {
@@ -137,6 +153,14 @@ module.exports = function (grunt) {
                     port: 8001,                
                     open: {
                         target: 'http://localhost:8001/demo'
+                    }
+                }
+            },
+            docs: {
+                options: {    
+                    port: 8002,         
+                    open: {
+                        target: 'http://localhost:8002/docs'
                     }
                 }
             }
@@ -156,5 +180,7 @@ module.exports = function (grunt) {
     ]);
     grunt.registerTask('demo', [
         'connect:demo', 
-        'watch:demo']);
+        'watch:demo'
+    ]);
+    grunt.registerTask('doc', ['clean:docs', 'jsdoc', 'connect:docs', 'watch:docs']);
 };
