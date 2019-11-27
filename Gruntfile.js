@@ -2,6 +2,7 @@ module.exports = function (grunt) {
 
     //instead of loadNpmTasks, load all dev dependencies from the package.json
     require('load-grunt-tasks')(grunt);
+    require("matchdep").filterDev(["grunt-*", "intern"]).forEach(grunt.loadNpmTasks);
 
     var VERSION_REGEXP = /\b(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?\b/i;
     var includedModules = [
@@ -128,6 +129,66 @@ module.exports = function (grunt) {
                 }
             }
         },
+        intern: {
+            options: {
+                suites: ["tests/unit/**/*.js",],
+                functionalSuites: ["tests/functional/**/*.js"],
+                environments: [
+                    {
+                        browserName: "chrome",
+                        fixSessionCapabilities: "no-detect",
+                        chromeOptions: {
+                            args: ["headless", "disable-gpu", "window-size=1024,768"]
+                        }
+                    }
+                ],
+                reporters: ['runner'],
+            },
+            browser: {
+                options: {
+                    tunnelOptions: {
+                        drivers: [
+                            { name: "chrome", "version": "78.0.3904.70" }
+                        ]
+                    },
+                    loader: {
+                        script: "dojo2",
+                        options: {
+                            async: false,
+                            tlmSiblingOfDojo: false,
+                            has: {
+                                "extend-esri": 1
+                            },
+                            packages: [
+                                {
+                                    name: "magcore",
+                                    location: "<%=config.src%>/js"
+                                },
+                                {
+                                    name: "esri",
+                                    location: "node_modules/arcgis-js-api"
+                                },
+                                {
+                                    name: "dojo",
+                                    location: "node_modules/dojo"
+                                },
+                                {
+                                    name: "dojox",
+                                    location: "node_modules/dojox"
+                                },
+                                {
+                                    name: "dijit",
+                                    location: "node_modules/dijit"
+                                }
+                            ]
+                        }
+                    },
+                    plugins: [
+                        'node_modules/jquery/dist/jquery.js'
+                    ]
+                }
+            }
+        },
         watch: {
             options: {
                 livereload: 35719                
@@ -183,4 +244,5 @@ module.exports = function (grunt) {
         'watch:demo'
     ]);
     grunt.registerTask('doc', ['clean:docs', 'jsdoc', 'connect:docs', 'watch:docs']);
+    grunt.registerTask('test', ['intern']);
 };
