@@ -1,15 +1,21 @@
 {
   "name": "magcore",
-  "version": "0.1.0",
-  "description": "MAG core repository",
+  "version": "0.0.1",
+  "description": "The MAG Core JavaScript library for utilization within the MAG suite of mapping applications.",
+  "homepage": "https://github.com/AZMAG/map-mag-core-js",
+  "browser": "dist/js/magcore.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AZMAG/map-mag-core-js"
+    "url": "git+https://github.com/AZMAG/map-mag-core-js.git"
   },
   "keywords": [
     "MAG"
   ],
-  "author": "MAG Regional Analytics Devision (http://www.azmag.gov/About-Us/Divisions/Regional-Analytics-Division/)",
+  "main": "dist/js/magcore.js",
+  "author": "MAG Regional Analytics Division (http://www.azmag.gov/About-Us/Divisions/Regional-Analytics-Division/)",
+  "contributors": [
+    "Geographic Information Services, Inc."
+  ],
   "license": "MIT",
   "devDependencies": {
     "grunt": "^1.0.4",
@@ -18,6 +24,7 @@
     "grunt-contrib-clean": "^2.0.0",
     "grunt-contrib-requirejs": "^1.0.0",
     "grunt-text-replace": "^0.4.0",
-    "load-grunt-tasks": "^5.1.0"
+    "load-grunt-tasks": "^5.1.0",
+    "uglify-es": "^3.3.9"
   }
 }

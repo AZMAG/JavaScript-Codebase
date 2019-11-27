@@ -3,9 +3,10 @@ module.exports = function (grunt) {
     //instead of loadNpmTasks, load all dev dependencies from the package.json
     require('load-grunt-tasks')(grunt);
 
-    var VERSION_REGEXP = /\bv(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?\b/i;
+    var VERSION_REGEXP = /\b(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?\b/i;
     var includedModules = [
-        'magcore/utils/utils'
+        'magcore/main',
+        'magcore/utils/formatter'
     ];
     var excludedModules = [];
     var paths = {
@@ -17,15 +18,14 @@ module.exports = function (grunt) {
         config: {
             out: 'dist',
             demos: 'demos',
-            cssSource: 'src/css',
-            cssPlusSource: 'src/plus/css'
-        },        
-        license: grunt.file.read('LICENSE'),
+            cssSource: 'src/css'
+        },
+        license: grunt.file.read('LICENSE.md'),
         pkg: grunt.file.readJSON('package.json'),
         banner: '/*! <%= pkg.description %>\n *\n' +
-        ' * <%= pkg.name %> v<%= pkg.version %> (<%= pkg.repository.url %>)\n' +
-        ' * <%= license %>\n' +
-        ' */\n',
+            ' * <%= pkg.name %> v<%= pkg.version %> (<%= pkg.repository.url %>)\n' +
+            ' * <%= license %>\n' +
+            ' */\n',
         usebanner: {
             release: {
                 options: {
@@ -33,7 +33,7 @@ module.exports = function (grunt) {
                     banner: '<%= banner %>'
                 },
                 files: {
-                    src: [ './<%=config.out%>/js/*.js']
+                    src: ['./<%=config.out%>/js/*.js']
                 }
             },
             debug: {
@@ -42,14 +42,14 @@ module.exports = function (grunt) {
                     banner: '<%= banner %>'
                 },
                 files: {
-                    src: [ './<%=config.out%>/js/*.js']
+                    src: ['./<%=config.out%>/js/*.js']
                 }
             }
         },
         bump: {
             options: {
                 files: ['package.json', 'src/js/main.js'],
-                updateConfigs: [ 'pkg' ],
+                updateConfigs: ['pkg'],
                 commit: false,
                 createTag: false,
                 tagName: '%VERSION%',
@@ -62,7 +62,7 @@ module.exports = function (grunt) {
         requirejs: {
             debug: {
                 options: {
-                    baseUrl: 'src/js',                    
+                    baseUrl: 'src/js',
                     out: './<%=config.out%>/js/<%= pkg.name %>.js',
                     // allow dependencies to be resolved but don't include in output (empty:)
                     paths: paths,
@@ -79,34 +79,50 @@ module.exports = function (grunt) {
             },
             release: {
                 options: {
-                    baseUrl: 'src/js',                    
-                    out: '<%=config.out%>/js/<%= pkg.name %>.min.js',
+                    baseUrl: 'src/js',
                     // allow dependencies to be resolved but don't include in output (empty:)
                     paths: paths,
                     // but don't include them in the main build
                     exclude: excludedModules,
                     include: includedModules,
                     inlineText: true,
-                    optimize: 'uglify2',
+                    optimize: 'none',
                     generateSourceMaps: false,
                     preserveLicenseComments: true,
                     findNestedDependencies: true,
                     removeCombined: true,
-                    uglify2: {
-                        compress: {
-                            keep_infinity: true
-                        }
+                    out: function (text, sourceMapText) {
+                        var UglifyJS = require('uglify-es'),
+                            uglified = UglifyJS.minify(text),
+                            config = grunt.config.get('config'),
+                            pkg = grunt.config.get('pkg');
+
+                        grunt.file.write(`${config.out}/js/${pkg.name}.min.js`, uglified.code);
                     }
                 }
             }
         },
+        uglify: {
+            options: {
+                preserveComments: "true",
+                mangle: false
+            },
+            target0: {
+                files: [{
+                    expand: true,
+                    cwd: "<%=config.out%>/js",
+                    src: ["*.js"],
+                    dest: "<%=config.out%>/js"
+                }]
+            }
+        },
         replace: {
             src: {
-                src: [ 'src/js/main.js'],
-                dest: [ 'src/js/main.js'],
+                src: ['src/js/main.js'],
+                dest: ['src/js/main.js'],
                 replacements: [{
                     from: VERSION_REGEXP,
-                    to: 'v<%=pkg.version%>'
+                    to: '<%=pkg.version%>'
                 }]
             }
         },
@@ -116,16 +132,16 @@ module.exports = function (grunt) {
         }
     })
     grunt.registerTask('debug', [
-        'clean:debug', 
-        'requirejs:debug', 
-        'requirejs:release', 
+        'clean:debug',
+        'requirejs',
+        'requirejs:release',
         'usebanner:debug'
-        ]);
-      grunt.registerTask('default', [
-        'clean:release', 
+    ]);
+    grunt.registerTask('default', [
+        'clean:release',
         'requirejs',
         'replace:src',
         'usebanner:release'
-        ]);
+    ]);
 
 };
