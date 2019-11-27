@@ -101,21 +101,7 @@ module.exports = function (grunt) {
                     }
                 }
             }
-        },
-        uglify: {
-            options: {
-                preserveComments: "true",
-                mangle: false
-            },
-            target0: {
-                files: [{
-                    expand: true,
-                    cwd: "<%=config.out%>/js",
-                    src: ["*.js"],
-                    dest: "<%=config.out%>/js"
-                }]
-            }
-        },
+        },       
         replace: {
             src: {
                 src: ['src/js/main.js'],
@@ -129,6 +115,31 @@ module.exports = function (grunt) {
         clean: {
             release: ['./<%=config.out%>'],
             debug: ['<%=config.out%>/js/magcore.*']
+        },
+        watch: {
+            options: {
+                livereload: 35729                
+            },
+            demo: {
+                files: ['./src/sass/**/*.sass', './src/js/**/*.js', './src/js/**/*.html',                
+                './demo/sass/**/*.sass', './demo/js/**/*.js', './demo/js/**/*.html', './demo/index.html'],
+                tasks: ['debug']
+            }
+        },
+        connect: {
+            options: {
+                hostname: 'localhost',
+                livereload: 35729,
+                base: './'
+            },            
+            demo: {
+                options: {    
+                    port: 8001,                
+                    open: {
+                        target: 'http://localhost:8001/demo'
+                    }
+                }
+            }
         }
     })
     grunt.registerTask('debug', [
@@ -143,5 +154,7 @@ module.exports = function (grunt) {
         'replace:src',
         'usebanner:release'
     ]);
-
+    grunt.registerTask('demo', [
+        'connect:demo', 
+        'watch:demo']);
 };

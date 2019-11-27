@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <title>MAG JavaScript API Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body>
+  <main>
+    <h1>MAG Core JavaScript Library (<small></small>)</h1>
+  </main>
+  <!-- script imports -->
+  <script src="https://js.arcgis.com/4.11/"></script>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../dist/js/magcore.js"></script>
+  <script type="text/javascript">
+      require(["jquery", "magcore/main"], function($, magcore) {
+        $("h1 > small").html(`version ${magcore.version}` );
+      });
+  </script>
+</body>
+</html>
