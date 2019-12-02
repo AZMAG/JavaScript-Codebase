@@ -9,6 +9,7 @@ The following dependencies are required to build this application (if you alread
  1. Installation
 	- Git - download and install for you environment [here](http://git-scm.com/).
 	- NodeJS - download and install for your environment [here](http://nodejs.org/).
+	- Sass - `npm install -g sass`
 	
 2. Application Dependencies
 	```

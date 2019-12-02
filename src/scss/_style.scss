@@ -1,0 +1,9 @@
+@import "variables";
+
+@mixin style() {
+
+  body {
+    font-family: $font-family-base;
+    font-size: $font-size-base;    
+  }
+}

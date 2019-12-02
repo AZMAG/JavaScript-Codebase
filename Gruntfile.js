@@ -19,8 +19,7 @@ module.exports = function (grunt) {
         config: {
             out: 'dist',
             src: 'src',
-            demos: 'demos',
-            cssSource: 'src/css'
+            demos: 'demos'
         },
         license: grunt.file.read('LICENSE.md'),
         pkg: grunt.file.readJSON('package.json'),
@@ -30,15 +29,6 @@ module.exports = function (grunt) {
             ' */\n',
         usebanner: {
             release: {
-                options: {
-                    position: 'top',
-                    banner: '<%= banner %>'
-                },
-                files: {
-                    src: ['./<%=config.out%>/js/*.js']
-                }
-            },
-            debug: {
                 options: {
                     position: 'top',
                     banner: '<%= banner %>'
@@ -64,7 +54,7 @@ module.exports = function (grunt) {
         requirejs: {
             debug: {
                 options: {
-                    baseUrl: '<%=config.src%>/js',
+                    baseUrl: './<%=config.src%>/js',
                     out: './<%=config.out%>/js/<%= pkg.name %>.js',
                     // allow dependencies to be resolved but don't include in output (empty:)
                     paths: paths,
@@ -81,7 +71,7 @@ module.exports = function (grunt) {
             },
             release: {
                 options: {
-                    baseUrl: '<%=config.src%>/js',
+                    baseUrl: './<%=config.src%>/js',
                     // allow dependencies to be resolved but don't include in output (empty:)
                     paths: paths,
                     // but don't include them in the main build
@@ -106,8 +96,8 @@ module.exports = function (grunt) {
         },       
         replace: {
             src: {
-                src: ['<%=config.src%>/js/main.js'],
-                dest: ['<%=config.src%>/js/main.js'],
+                src: ['./<%=config.src%>/js/main.js'],
+                dest: ['./<%=config.src%>/js/main.js'],
                 replacements: [{
                     from: VERSION_REGEXP,
                     to: '<%=pkg.version%>'
@@ -116,12 +106,42 @@ module.exports = function (grunt) {
         },
         clean: {
             release: ['./<%=config.out%>'],
-            debug: ['<%=config.out%>/js/magcore.*'],
+            debug: ['./<%=config.out%>/css', './<%=config.out%>/js/magcore.*'],
             docs: ['docs']
+        },
+        sass: {
+            release: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: './<%=config.src%>/scss',
+                        src: ['main.scss'],
+                        dest: './<%=config.src%>/css',
+                        ext: '.css'
+                    }
+                ]
+            }
+        },
+        cssmin: {
+            release: {
+                files: {
+                    './<%=config.out%>/css/<%= pkg.name %>.min.css': [                                               
+                        './<%=config.src%>/css/main.css'
+                    ]
+                }
+            }
+        },
+        concat: {
+            css: {
+                src: [
+                    './<%=config.src%>/css/main.css'
+                ],
+                dest: './<%=config.out%>/css/<%=pkg.name%>.css'
+            }
         },
         jsdoc: {
             release: {
-                src: ['<%=config.src%>/js/**/*.js'],
+                src: ['./<%=config.src%>/js/**/*.js'],
                 options: {
                     destination: './docs',
                     configure: './jsdoc.conf.json',
@@ -162,7 +182,7 @@ module.exports = function (grunt) {
                             packages: [
                                 {
                                     name: "magcore",
-                                    location: "<%=config.src%>/js"
+                                    location: "./<%=config.src%>/js"
                                 },
                                 {
                                     name: "esri",
@@ -194,8 +214,8 @@ module.exports = function (grunt) {
                 livereload: 35719                
             },
             demo: {
-                files: ['./<%=config.src%>/sass/**/*.sass', './<%=config.src%>/js/**/*.js', './<%=config.src%>/js/**/*.html',                
-                './demo/sass/**/*.sass', './demo/js/**/*.js', './demo/js/**/*.html', './demo/index.html'],
+                files: ['./<%=config.src%>/scss/**/*.{scss,sass}', './<%=config.src%>/js/**/*.js', './<%=config.src%>/js/**/*.html',                
+                './demo/css/**/*.css', './demo/js/**/*.js', './demo/js/**/*.html', './demo/index.html'],
                 tasks: ['debug']
             },
             docs: {
@@ -228,16 +248,23 @@ module.exports = function (grunt) {
         }
     })
     grunt.registerTask('debug', [
-        'clean:debug',
+        'clean:debug',        
         'requirejs',
-        'requirejs:release',
-        'usebanner:debug'
+        'replace',
+        'sass',
+        'cssmin', 
+        'concat', 
+        'usebanner'
     ]);
     grunt.registerTask('default', [
+        'intern',
         'clean:release',
         'requirejs',
-        'replace:src',
-        'usebanner:release'
+        'replace',
+        'sass',
+        'cssmin', 
+        'concat', 
+        'usebanner'
     ]);
     grunt.registerTask('demo', [
         'connect:demo', 
