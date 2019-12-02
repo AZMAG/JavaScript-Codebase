@@ -34,7 +34,7 @@ module.exports = function (grunt) {
                     banner: '<%= banner %>'
                 },
                 files: {
-                    src: ['./<%=config.out%>/js/*.js']
+                    src: ['./<%=config.out%>/js/*.js', './<%=config.out%>/css/*.css']
                 }
             }
         },
