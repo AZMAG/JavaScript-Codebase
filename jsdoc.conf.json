@@ -1,0 +1,42 @@
+{
+	"tags": {
+		"allowUnknownTags": true
+	},
+	"plugins": [
+		"plugins/markdown"
+	],
+	"source": {
+		"include": [
+			"./readme.md"
+		],
+		"includePattern": ".+\\.js(doc)?$",
+		"excludePattern": "(^|\\/|\\\\)_"
+	},
+	"opts": {
+		"destination": "./docs/"
+	},
+	"templates": {
+		"default": {
+			"cleverLinks": false,
+			"monospaceLinks": false,
+			"dateFormat": "YYYY",
+			"outputSourceFiles": false,
+			"outputSourcePath": true,
+			"systemName": "MAG Core JavaScript",
+			"footer": "",
+			"copyright": "Copyright (c) 2019 Maricopa Association of Governments",
+			"navType": "vertical",
+			"theme": "docdash",
+			"linenums": true,
+			"collapseSymbols": false,
+			"inverseNav": true,
+			"highlightTutorialCode": true,
+			"includeDate": false,
+			"protocol": "fred://"
+		}
+	},
+	"markdown": {
+		"parser": "gfm",
+		"hardwrap": false
+	}
+}

@@ -1,0 +1,19 @@
+$mainColor: #081f21 !default;
+$secondaryColor: #2baab1 !default;
+$textColor: #fff !default;
+$hoverColor: #535353 !default;
+$hoverText: #fff !default;
+
+$colors: () !default;
+$colors: map-merge(("main": $mainColor,
+    "secondary": $secondaryColor,
+    "text": $textColor,
+    "hover": $hoverColor,
+    "hover-text": $hoverText),
+  $colors);
+
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base: 'Poppins', $font-family-sans-serif !default;
+
+$font-size-base: 1em !default;

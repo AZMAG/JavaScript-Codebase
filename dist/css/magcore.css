@@ -24,4 +24,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-define("magcore/main",[],function(){return{version:"0.0.1"}}),define("magcore/utils/formatter",[],function(){return Number.prototype.MagFormat=function(){return this.toFixed(1)},{qs:function(n){n=n.replace(/[*+?^$.\[\]{}()|\\\/]/g,"\\$&");var e=location.search.match(new RegExp("[?&]"+n+"=([^&]+)(&|$)"));return e&&decodeURIComponent(e[1].replace(/\+/g," "))},numberWithCommas:function(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",")},chartTooltip:function(n,e){return`${this.numberWithCommas(n)} <r> ${e}`},valueAxisTemplate:function(n){return this.numberWithCommas(n)},wrapText:function(n){var e="",t=0;if(n.length>=12){var r=n.split(" ");$.each(r,function(n,r){var o=" ";t>=12&&(o="\n",t=0),e+=o+r,t+=r.length})}else e=n;return e},showInThousands:function(n){console.log(n)}}});
+:root {
+  --main: #081f21;
+  --secondary: #2baab1;
+  --text: #fff;
+  --hover: #535353;
+  --hover-text: #fff;
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+body {
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1em;
+}
+
+/*# sourceMappingURL=main.css.map */
