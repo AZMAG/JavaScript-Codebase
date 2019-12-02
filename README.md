@@ -14,7 +14,6 @@ The following dependencies are required to build this application (if you alread
 2. Application Dependencies
 	```
 	npm install
-	bower install
 	```
 
 ## Build
