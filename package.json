@@ -11,10 +11,16 @@
   "keywords": [
     "MAG"
   ],
-  "main": "dist/js/magcore.js",
   "author": "MAG Regional Analytics Division (http://www.azmag.gov/About-Us/Divisions/Regional-Analytics-Division/)",
   "contributors": [
     "Geographic Information Services, Inc."
+  ],
+  "files": [
+    "dist/**/*",
+    "docs/**/*",
+    "demo/**/*",
+    "gruntfile.js",
+    "jsdoc.conf.json"
   ],
   "license": "MIT",
   "devDependencies": {
