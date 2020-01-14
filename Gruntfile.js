@@ -7,11 +7,13 @@ module.exports = function (grunt) {
     var VERSION_REGEXP = /\b(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?\b/i;
     var includedModules = [
         'magcore/main',
+        'magcore/reports/reportsQuery',
         'magcore/utils/formatter'
     ];
     var excludedModules = [];
     var paths = {
-        'magcore': ''
+        'magcore': '',
+        'esri': 'empty:'
     };
     var dependencyPaths = {};
     var includedDependencies = [];
