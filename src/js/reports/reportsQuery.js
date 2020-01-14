@@ -45,10 +45,29 @@ function(
                 acsData,
                 censusData
             };
+        },
+        getSpecificData: async function (conf, layer) {
+            let displayField = "NAME";
+            let optionalFields = conf.displayFields || [displayField];
+            let outFields = ["OBJECTID", "GEOID"].concat(optionalFields.slice());
+
+            const q = {
+                where: "1=1",
+                outFields: outFields,
+                returnGeometry: false,
+                distinct: true,
+                orderByFields: optionalFields
+            };
+
+            let res = await layer.queryFeatures(q);
+            let rtnFeatures = [];
+            res.features.forEach((feature) => {
+                rtnFeatures.push(feature.attributes);
+            })
+            return rtnFeatures;
         }
     };
 
     return reportsQuery;
-
 
 });
