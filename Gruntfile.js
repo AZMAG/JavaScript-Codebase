@@ -7,6 +7,7 @@ module.exports = function (grunt) {
     var VERSION_REGEXP = /\b(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?\b/i;
     var includedModules = [
         'magcore/main',
+        'magcore/utils/charts',
         'magcore/utils/formatter',
         'magcore/utils/reports'
     ];

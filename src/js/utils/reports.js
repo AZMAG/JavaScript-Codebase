@@ -6,7 +6,7 @@ define([
 function(
     QueryTask
 ) {
-    var reportsQuery = {
+    var reportUtils = {
         queryGeoIds: async function (conf, url, geoids, geo) {
             let where = "1=1";
             if (geoids && geoids.length > 0) {
@@ -68,6 +68,6 @@ function(
         }
     };
 
-    return reportsQuery;
+    return reportUtils;
 
 });
