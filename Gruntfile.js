@@ -7,8 +7,8 @@ module.exports = function (grunt) {
     var VERSION_REGEXP = /\b(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?\b/i;
     var includedModules = [
         'magcore/main',
-        'magcore/reports/reportsQuery',
-        'magcore/utils/formatter'
+        'magcore/utils/formatter',
+        'magcore/utils/reports'
     ];
     var excludedModules = [];
     var paths = {
