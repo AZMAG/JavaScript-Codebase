@@ -1,31 +1,44 @@
 "use strict";
-define(
-    [
-        "magcore/utils/formatter"
-    ], function(
-        formatter
-  ) {
+define([
+  "magcore/utils/formatter"
+], function (
+  formatter
+) {
+  /** The charts utility is a helper class containing static methods for working with chart data.
+   * @exports magcore/utils/charts
+   * @since 1.0.0
+   */
   var chartUtils = {
-    createChartParams: function(ops, seriesColors) {
+    /** Creates parameters for generating charts.
+     * @param {Object} options - Options for generating parameters.
+     * @param {Object[]} options.data - An array of data objects.
+     * @param {String} options.target - The ID of an HTML element to place the chart.
+     * @param {String} options.type - The chart type.
+     * @param {String} options.category - The chart category.
+     * @param {Object[]} [options.compareData] - An array of data objects for comparison.
+     * @param {String[]} [options.names] - An array of names labeling the chart series.
+     * @param {String[]} seriesColors - An array of hex color values.
+     */
+    createChartParams: function (options, seriesColors) {
       let series = [
         {
           field: "fieldValue",
           categoryField: "fieldAlias",
-          type: ops.compareData ? "bar" : ops.type,
+          type: options.compareData ? "bar" : options.type,
           gap: 0.5,
-          data: ops.data,
-          name: ops.names ? ops.names[0] : undefined
+          data: options.data,
+          name: options.names ? options.names[0] : undefined
         }
       ];
 
-      if (ops.compareData) {
+      if (options.compareData) {
         series.push({
           field: "fieldValue",
           categoryField: "fieldAlias",
           type: "bar",
           gap: 0.5,
-          data: ops.compareData,
-          name: ops.names ? ops.names[1] : undefined
+          data: options.compareData,
+          name: options.names ? options.names[1] : undefined
         });
       }
       return {
@@ -47,7 +60,7 @@ define(
           },
           tooltip: {
             visible: true,
-            template: function(item) {
+            template: function (item) {
               var text = formatter.chartTooltip(item.value, item.category);
               return text + " <br> " + kendo.format("{0:P}", item.percentage);
             }
@@ -62,9 +75,9 @@ define(
           labels: {
             visible: true,
             rotation: {
-              angle: ops.type === "column" ? 45 : 0
+              angle: options.type === "column" ? 45 : 0
             },
-            template: function(item) {
+            template: function (item) {
               var text = formatter.wrapText(item.value);
               return text;
             }
@@ -79,7 +92,7 @@ define(
         valueAxis: {
           color: "black",
           labels: {
-            template: function(item) {
+            template: function (item) {
               var text = formatter.valueAxisTemplate(item.value);
               return text;
             },
@@ -88,7 +101,10 @@ define(
         }
       };
     },
-    GetCategories: function(data) {
+    /** Gets chart categories based on the input data.
+     * @param {Object[]} data - An arra of data objects.
+     */
+    getCategories: function (data) {
       return data.reduce((categories, d) => {
         if (!categories.includes(d.chartCategory) && d.chartCategory !== "") {
           categories.push(d.chartCategory);

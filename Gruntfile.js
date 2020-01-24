@@ -7,9 +7,11 @@ module.exports = function (grunt) {
     var VERSION_REGEXP = /\b(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)(?:-[\da-z\-]+(?:\.[\da-z\-]+)*)?(?:\+[\da-z\-]+(?:\.[\da-z\-]+)*)?\b/i;
     var includedModules = [
         'magcore/main',
+        'magcore/resources/color-ramps',
         'magcore/utils/charts',
         'magcore/utils/formatter',
-        'magcore/utils/reports'
+        'magcore/utils/reports',
+        'magcore/utils/application'
     ];
     var excludedModules = [];
     var paths = {
@@ -216,7 +218,7 @@ module.exports = function (grunt) {
             options: {
                 livereload: 35719                
             },
-            demo: {
+            source: {
                 files: ['./<%=config.src%>/scss/**/*.{scss,sass}', './<%=config.src%>/js/**/*.js', './<%=config.src%>/js/**/*.html',                
                 './demo/css/**/*.css', './demo/js/**/*.js', './demo/js/**/*.html', './demo/index.html'],
                 tasks: ['debug']
@@ -271,8 +273,9 @@ module.exports = function (grunt) {
     ]);
     grunt.registerTask('demo', [
         'connect:demo', 
-        'watch:demo'
+        'watch:source'
     ]);
+    grunt.registerTask('run', ['debug', 'watch:source']);
     grunt.registerTask('doc', ['clean:docs', 'jsdoc', 'connect:docs', 'watch:docs']);
     grunt.registerTask('test', ['intern']);
 };

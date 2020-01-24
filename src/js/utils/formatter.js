@@ -7,7 +7,7 @@ define([], function () {
    * @since 1.0.0
    */
   var formatter = {
-    /** Parses the query strnig of the current URL for the specified key.
+    /** Parses the query string of the current URL for the specified key.
      * @param {string} key - The key for which to retrieve the query string value.
      * @returns {string} The value of the query string key.
      */
@@ -63,6 +63,20 @@ define([], function () {
 
     showInThousands: function (value) {
       console.log(value);
+    },
+    /** Formats a value as a percentage. 
+     * @param {Number} val - The value to format.
+     * @returns {String} A formatted label.
+     */
+    pctLabel: function (val) {
+      return (Math.round(val * 1000) / 10).toLocaleString("en-US");
+    },
+    /** Formats a value as a whole number.
+     * @param {Number} val - The value to format.
+     * @returns {String} A formatted label.
+     */
+    numLabel: function (val) {
+      return Math.round(val).toLocaleString("en-US");
     }
   };
 
