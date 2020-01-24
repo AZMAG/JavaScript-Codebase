@@ -26,7 +26,11 @@ define([], function () {
  */
 /** 
  * @external Geometry
- * @see {@link https://developers.arcgis.com/javascript/jsapi/geometry-amd.html|Geometry}
+ * @see {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-geometry-Geometry.html|Geometry}
+ */
+/** 
+ * @external Map
+ * @see {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html|Map}
  */
 
 // ********************** jQuery externals ****************************

@@ -52,7 +52,11 @@ define('magcore/main',[], function () {
  */
 /** 
  * @external Geometry
- * @see {@link https://developers.arcgis.com/javascript/jsapi/geometry-amd.html|Geometry}
+ * @see {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-geometry-Geometry.html|Geometry}
+ */
+/** 
+ * @external Map
+ * @see {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html|Map}
  */
 
 // ********************** jQuery externals ****************************
@@ -914,10 +918,12 @@ define('magcore/widgets/layer-list',[
     {
       templateString: template,
       /** Instantiates a new LayerList instance.
-       * @param {Object} options - .
+       * @param {Object} options - Configuration options for the list.
+       * @param {Object[]} options.layers - An array of individual layer options.
+       * @param {external:Map} options.map - A map instance containing the layers.
        */
-      constructor: function () {
-
+      constructor: function ({ map, layers }, domNode) {
+        
       },
       postCreate: function () {
         $(this.layerList).html("TEST");
