@@ -36,3 +36,9 @@ define([], function () {
  * @see {@link http://api.jquery.com/Types/#jQuery|jQuery}
  * @author {@link https://github.com/jquery/jquery/blob/master/AUTHORS.txt|JS Foundation and other contributors}
  */
+
+ // ********************** Dojo externals ****************************
+/** Base class for all Dojo widgets.
+ * @external WidgetBase
+ * @see {@link https://dojotoolkit.org/reference-guide/1.10/dijit/_WidgetBase.html#dijit-widgetbase|WidgetBase}
+ */

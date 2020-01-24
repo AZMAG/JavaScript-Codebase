@@ -61,6 +61,12 @@ define('magcore/main',[], function () {
  * @version 3.4.1
  * @see {@link http://api.jquery.com/Types/#jQuery|jQuery}
  * @author {@link https://github.com/jquery/jquery/blob/master/AUTHORS.txt|JS Foundation and other contributors}
+ */
+
+ // ********************** Dojo externals ****************************
+/** Base class for all Dojo widgets.
+ * @external WidgetBase
+ * @see {@link https://dojotoolkit.org/reference-guide/1.10/dijit/_WidgetBase.html#dijit-widgetbase|WidgetBase}
  */;
 define('magcore/resources/color-ramps',[], function () {
   /** Provides a set of default color ramps.
@@ -882,4 +888,40 @@ define('magcore/utils/application',[], function () {
     return hex.length === 1 ? "0" + hex : hex;
   }
   return appUtils;
+});
+
+define('magcore/widgets/templates/layer-list.html',[],function () { return '<div>\r\n  <span class="layersTitle">TEST: Select any of the items from\r\n    the list below to add to the map.</span>\r\n  <div dojoattachpoint="layerList"></div>\r\n</div>';});
+
+define('magcore/widgets/layer-list',[
+  "./templates/layer-list.html",
+  "dijit/_WidgetBase",
+  "dijit/_TemplatedMixin",
+  "dojo/_base/declare"
+], function (
+  template,
+  _WidgetBase,
+  _TemplatedMixin,
+  declare
+) {
+  /** Provides a reusable layer list for toggling layer visibilities.
+   * @name LayerList
+   * @constructor
+   * @augments {external:WidgetBase}
+   * @since 1.0.0
+   */
+  return declare([_WidgetBase, _TemplatedMixin],
+    /** @lends LayerList.prototype */
+    {
+      templateString: template,
+      /** Instantiates a new LayerList instance.
+       * @param {Object} options - .
+       */
+      constructor: function () {
+
+      },
+      postCreate: function () {
+        $(this.layerList).html("TEST");
+      },
+      declaredClass: 'mag-layer-list'
+    });
 });

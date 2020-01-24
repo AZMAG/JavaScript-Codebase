@@ -58,6 +58,7 @@
     "intern": "^4.6.0",
     "load-grunt-tasks": "^5.1.0",
     "matchdep": "^2.0.0",
+    "requirejs-text": "^2.0.15",
     "uglify-es": "^3.3.9"
   },
   "dependencies": {

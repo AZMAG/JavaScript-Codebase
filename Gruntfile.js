@@ -11,12 +11,19 @@ module.exports = function (grunt) {
         'magcore/utils/charts',
         'magcore/utils/formatter',
         'magcore/utils/reports',
-        'magcore/utils/application'
+        'magcore/utils/application',
+        "magcore/widgets/layer-list"
     ];
-    var excludedModules = [];
+    var excludedModules = [
+        'dojo/text'
+    ];
     var paths = {
         'magcore': '',
-        'esri': 'empty:'
+        'esri': 'empty:',
+        'dojo': 'empty:',
+        'dojox': 'empty:',
+        'dijit': 'empty:',
+        'dojo/text': '../../node_modules/requirejs-text/text'
     };
     var dependencyPaths = {};
     var includedDependencies = [];
@@ -106,6 +113,20 @@ module.exports = function (grunt) {
                 replacements: [{
                     from: VERSION_REGEXP,
                     to: '<%=pkg.version%>'
+                }]
+            },
+            release: {
+                src: '<%=config.out%>/js/<%= pkg.name %>.min.js',
+                dest: '<%=config.out%>/js/<%= pkg.name %>.min.js',
+                replacements: [{
+                    from: 'dojo/text!', to: ''
+                }]
+            },
+            debug: {
+                src: '<%=config.out%>/js/<%= pkg.name %>.js',
+                dest: '<%=config.out%>/js/<%= pkg.name %>.js',
+                replacements: [{
+                    from: 'dojo/text!', to: ''
                 }]
             }
         },
