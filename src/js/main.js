@@ -2,7 +2,7 @@ define([], function () {
     /** The global MagCore object. 
  * @exports magcore/main
  * @version 0.0.1
- * @author MAG Regional Analytics Devision <mag@azmag.gov>
+ * @author MAG Regional Analytics Division <mag@azmag.gov>
  * @see {@link http://www.azmag.gov/About-Us/Divisions/Regional-Analytics-Division}
  */
     var magCore = {
