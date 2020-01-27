@@ -15,6 +15,12 @@ define([], function () {
     return magCore;
 });
 
+// ************************** HTML **********************************
+/**
+ * @external HTMLElement
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement|HTMLElement}
+ */
+
 // ********************** ESRI externals ****************************
 /**
  * @external FeatureLayer
@@ -26,7 +32,11 @@ define([], function () {
  */
 /** 
  * @external Geometry
- * @see {@link https://developers.arcgis.com/javascript/jsapi/geometry-amd.html|Geometry}
+ * @see {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-geometry-Geometry.html|Geometry}
+ */
+/** 
+ * @external Map
+ * @see {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html|Map}
  */
 
 // ********************** jQuery externals ****************************
@@ -35,4 +45,10 @@ define([], function () {
  * @version 3.4.1
  * @see {@link http://api.jquery.com/Types/#jQuery|jQuery}
  * @author {@link https://github.com/jquery/jquery/blob/master/AUTHORS.txt|JS Foundation and other contributors}
+ */
+
+ // ********************** Dojo externals ****************************
+/** Base class for all Dojo widgets.
+ * @external WidgetBase
+ * @see {@link https://dojotoolkit.org/reference-guide/1.10/dijit/_WidgetBase.html#dijit-widgetbase|WidgetBase}
  */

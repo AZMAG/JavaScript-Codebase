@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>magcore/utils/data - Documentation</title>
+    <title>LayerList - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -32,7 +32,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">magcore/utils/data</h1>
+    <h1 class="page-title">LayerList</h1>
     
 
     
@@ -44,8 +44,9 @@
 
 <header>
     
-        
-            
+        <h2>
+        LayerList
+        </h2>
         
     
 </header>
@@ -55,11 +56,12 @@
         <div class="container-overview">
         
             
-                <div class="description"><p>The data utility is a helper class containing static methods for querying data.</p></div>
-            
 
-            
-                
+    
+
+    <h4 class="name" id="LayerList"><span class="type-signature"></span>new LayerList<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
 
 
 
@@ -106,6 +108,21 @@
 
 
 
+<div class="description">
+    <p>Provides a reusable layer list for toggling layer visibilities.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>require(["magcore/widgets/layer-list"], function(LayerList) { // code goes here. });</code></pre>
 
 
 
@@ -127,16 +144,20 @@
 
 
 
-
-
-
-
-
-
-            
         
         </div>
     
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="external-WidgetBase.html">external:WidgetBase</a></li>
+    </ul>
+
 
     
 
@@ -151,6 +172,151 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="baseClass"><span class="type-signature"></span>baseClass<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-default">Default Value:</dt>
+    <dd class="tag-default"><ul class="dummy">
+            <li>mag-layer-list</li>
+        </ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Root CSS class of the widget (ex: dijitTextBox), used to construct CSS classes to indicate widget state.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="templateString"><span class="type-signature"></span>templateString<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>A string that represents the widget template.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -160,7 +326,7 @@
 
     
 
-    <h4 class="name" id=".query"><span class="type-signature">(static) </span>query<span class="signature">(layer, query<span class="signature-attributes">opt</span>, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="constructor"><span class="type-signature"></span>constructor<span class="signature">(options, domNode)</span><span class="type-signature"></span></h4>
 
     
 
@@ -207,7 +373,7 @@
 
 
 <div class="description">
-    <p>Executes a query against the specified layer or query task.</p>
+    <p>Instantiates a new LayerList instance.</p>
 </div>
 
 
@@ -233,8 +399,6 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
         
 
@@ -243,73 +407,6 @@
     </thead>
 
     <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>layer</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><a href="external-FeatureLayer.html">external:FeatureLayer</a></span>
-|
-
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>The layer to query or a URL to a queryable layer.</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>query</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last"><p>An optional query specifying the options to pass to the layer query.</p></td>
-        </tr>
-
     
 
         <tr>
@@ -327,20 +424,10 @@
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
 
             
 
-            <td class="description last"><p>Additional options for the query as described below.</p>
+            <td class="description last"><p>Configuration options for the list.</p>
                 <h6>Properties</h6>
                 
 
@@ -354,11 +441,7 @@
         <th>Type</th>
 
         
-        <th>Attributes</th>
-        
 
-        
-        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -370,80 +453,46 @@
 
         <tr>
             
-                <td class="name"><code>attributesOnly</code></td>
+                <td class="name"><code>layers</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type">Array.&lt;Object></span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                    <code>false</code>
-                
-                </td>
-            
 
-            <td class="description last"><p>If specified, indicates whether to return just the attributes
-of the features or the features themselves. Only valid if <code>queryForCount</code> is false.</p></td>
+            <td class="description last"><p>An array of individual layer options.</p></td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>countOnly</code></td>
+                <td class="name"><code>map</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Boolean</span>
+<span class="param-type"><a href="external-Map.html">external:Map</a></span>
 
 
             
             </td>
 
             
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
 
             
-                <td class="default">
-                
-                    <code>false</code>
-                
-                </td>
-            
 
-            <td class="description last"><p>If specified, indicates whether to return the count of
-records matching the query. Only valid if <code>attributesOnly</code> is false.</p></td>
+            <td class="description last"><p>A map instance containing the layers.</p></td>
         </tr>
 
     
@@ -454,8 +503,119 @@ records matching the query. Only valid if <code>attributesOnly</code> is false.<
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>domNode</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type"><a href="external-HTMLElement.html">external:HTMLElement</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The ID or node representing the DOM element
+that will contain the widget.</p></td>
+        </tr>
+
+    
     </tbody>
 </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="postCreate"><span class="type-signature"></span>postCreate<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    <p>Processing after the DOM fragment is created.
+Called after the DOM fragment has been created, but not necessarily added to the document.
+Do not include any operations which rely on node dimensions or placement.</p>
+</div>
+
+
+
+
+
+
+
+
+
 
 
 

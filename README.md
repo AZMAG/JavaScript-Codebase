@@ -42,4 +42,4 @@ grunt test
 ### Writing tests
 
 For information on how to write Intern tests, see
-https://theintern.io/docs.html#Intern/4/docs/docs%2Fwriting_tests.md.
+<https://theintern.io/docs.html#Intern/4/docs/docs%2Fwriting_tests.md>.

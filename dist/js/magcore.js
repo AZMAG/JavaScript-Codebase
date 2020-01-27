@@ -1,9 +1,9 @@
 /*! The MAG Core JavaScript library for utilization within the MAG suite of mapping applications.
  *
- * magcore v0.0.1 (git+https://github.com/AZMAG/map-mag-core-js.git)
+ * magcore v0.0.1 (https://github.com/AZMAG/map-mag-core-js)
  * The MIT License (MIT)
 
-Copyright (c) 2019 Maricopa Association of Governments
+Copyright (c) 2020 Maricopa Association of Governments
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -41,6 +41,12 @@ define('magcore/main',[], function () {
     return magCore;
 });
 
+// ************************** HTML **********************************
+/**
+ * @external HTMLElement
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement|HTMLElement}
+ */
+
 // ********************** ESRI externals ****************************
 /**
  * @external FeatureLayer
@@ -52,7 +58,11 @@ define('magcore/main',[], function () {
  */
 /** 
  * @external Geometry
- * @see {@link https://developers.arcgis.com/javascript/jsapi/geometry-amd.html|Geometry}
+ * @see {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-geometry-Geometry.html|Geometry}
+ */
+/** 
+ * @external Map
+ * @see {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html|Map}
  */
 
 // ********************** jQuery externals ****************************
@@ -61,6 +71,12 @@ define('magcore/main',[], function () {
  * @version 3.4.1
  * @see {@link http://api.jquery.com/Types/#jQuery|jQuery}
  * @author {@link https://github.com/jquery/jquery/blob/master/AUTHORS.txt|JS Foundation and other contributors}
+ */
+
+ // ********************** Dojo externals ****************************
+/** Base class for all Dojo widgets.
+ * @external WidgetBase
+ * @see {@link https://dojotoolkit.org/reference-guide/1.10/dijit/_WidgetBase.html#dijit-widgetbase|WidgetBase}
  */;
 define('magcore/resources/color-ramps',[], function () {
   /** Provides a set of default color ramps.
@@ -882,4 +898,134 @@ define('magcore/utils/application',[], function () {
     return hex.length === 1 ? "0" + hex : hex;
   }
   return appUtils;
+});
+
+define('magcore/widgets/templates/layer-list.html',[],function () { return '<div>\r\n  <span class="layers-title">Select any of the items from\r\n    the list below to add to the map.</span>\r\n  <div data-dojo-attach-point="layerList"></div>\r\n</div>';});
+
+
+define('magcore/widgets/templates/layer-list-item.html',[],function () { return '<div class="checkbox-div" data-dojo-attach-event="onclick:toggle">\r\n  <input type="checkbox" ${checkedAttrSetting} data-layer-id="${layerId}"\r\n    class="regular-checkbox big-checkbox" />\r\n  <label></label>\r\n  <label class="layer-label">${title}</label>\r\n  <a style="height: 25px;" tabindex="0" role="button" data-html="true" data-toggle="popover" data-placement="auto"\r\n    data-trigger="hover" title="${title}" data-content="${definition}"><i class="fas fa-info-circle"></i>\r\n  </a>\r\n</div>';});
+
+define('magcore/widgets/layer-list',[
+  "./templates/layer-list.html",
+  "./templates/layer-list-item.html",
+  "dijit/_WidgetBase",
+  "dijit/_TemplatedMixin",
+  "dijit/_WidgetsInTemplateMixin",
+  "dojo/_base/declare"
+], function (
+  template,
+  itemTemplate,
+  _WidgetBase,
+  _TemplatedMixin,
+  _WidgetsInTemplateMixin,
+  declare
+) {
+  /** Provides a reusable layer list for toggling layer visibilities.
+   * @class LayerList
+   * @augments {external:WidgetBase}
+   * @since 1.0.0
+   * @example require(["magcore/widgets/layer-list"], function(LayerList) { // code goes here. });
+   */
+  var LayerList = declare([_WidgetBase, _TemplatedMixin],
+    /** @lends LayerList.prototype */
+    {
+      /** A string that represents the widget template.
+       * @type {String}
+       * @default
+       */
+      templateString: template,
+      /** Instantiates a new LayerList instance.
+       * @param {Object} options - Configuration options for the list.
+       * @param {Object[]} options.layers - An array of individual layer options.
+       * @param {external:Map} options.map - A map instance containing the layers.
+       * @param {(String|external:HTMLElement)} domNode - The ID or node representing the DOM element 
+       * that will contain the widget.
+       */
+      constructor: function ({ map, layers }, domNode) {
+      },
+      /** Processing after the DOM fragment is created.
+       * Called after the DOM fragment has been created, but not necessarily added to the document. 
+       * Do not include any operations which rely on node dimensions or placement. 
+       */
+      postCreate: function () {
+        this.layers.sort((a, b) => a.layerListOrder - b.layerListOrder);
+        this.layers.forEach(layer => {
+          if (layer.id !== "blockGroups") {
+            var cb = $("<div>");
+            $(this.layerList).append(cb);
+            new LayerListItem(Object.assign({}, layer, { 
+              map: this.map,
+              layerId: layer.id,
+              id: `${layer.id}_CheckBox`
+            }), cb[0]);
+          }
+        });
+      },
+      /** Root CSS class of the widget (ex: dijitTextBox), used to construct CSS classes to indicate widget state.
+       * @type {String}
+       * @default
+       */
+      baseClass: 'mag-layer-list'
+    });
+  /** Represents a single item in the layer list. Used internally and not meant for 
+   * use externally.
+   * @class LayerListItem
+   * @augments {external:WidgetBase}
+   * @since 1.0.0
+   * @private
+   */
+  var LayerListItem = declare([_WidgetBase, _TemplatedMixin],
+    /** @lends LayerListItem.prototype */
+    {
+      /** A string that represents the widget template.
+       * @type {String}
+       * @default
+       */
+      templateString: itemTemplate,
+      /** Instantiates a new layer list item.
+       * @param {Object} options - Configuration options for the item.
+       * @param {String} options.id - The unique ID of the list item.
+       * @param {String} options.title - The title to display in the list.
+       * @param {Boolean} options.visible - Whether the layer is visible by default.
+       * @param {(Boolean|Object)} options.legend - Whether to display a legend for the item.
+       * @param {String} options.definition - A description of the layer that will display in a popover.
+       * @param {external:Map} options.map - The map instance associated with this layer.
+       * @param {(String|external:HTMLElement)} domNode - The ID or node representing the DOM element 
+       * that will contain the widget.
+       */
+      constructor: function ({ id, visible, title, legend, definition, map }, domNode) {
+      },      
+      /** Processing after the DOM fragment is created.
+       * Called after the DOM fragment has been created, but not necessarily added to the document. 
+       * Do not include any operations which rely on node dimensions or placement. 
+       */
+      postCreate: function () {
+        if (this.legend && this.legend.group) {
+          this.id = this.legend.group.id;
+          this.title = this.legend.group.title;
+        }
+        $("[data-toggle=\"popover\"]", this.domNode).popover();
+      },
+      /** Called after the parameters to the widget have been read-in, but before the widget template is instantiated. 
+       * Especially useful to set properties that are referenced in the widget template. 
+       */
+      postMixInProperties: function () {
+        this.inherited(arguments);
+        this.checkedAttrSetting = this.visible === true ? "checked" : "";
+      },
+      /** Toggles the visibility of the layer. */
+      toggle: function () {        
+        //Toggle Checkbox
+        let cb = $(this.domNode).find(".big-checkbox");
+        let layerId = cb.data("layer-id");
+
+        //Toggle Layer
+        let layer = this.map.findLayerById(layerId);
+        if (layer) {
+          layer.visible = !layer.visible;
+          cb.prop("checked", !cb.prop("checked"));
+        }
+      }
+    });
+  return LayerList;
 });
