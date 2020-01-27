@@ -1,7 +1,10 @@
 @import "variables";
 @import "root";
 @import "style";
+@import "widgets";
+
 @mixin compile() {
   @include root();
   @include style();
+  @include widgets();
 }

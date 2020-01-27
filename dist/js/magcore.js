@@ -1,9 +1,9 @@
 /*! The MAG Core JavaScript library for utilization within the MAG suite of mapping applications.
  *
- * magcore v0.0.1 (git+https://github.com/AZMAG/map-mag-core-js.git)
+ * magcore v0.0.1 (https://github.com/AZMAG/map-mag-core-js)
  * The MIT License (MIT)
 
-Copyright (c) 2019 Maricopa Association of Governments
+Copyright (c) 2020 Maricopa Association of Governments
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -900,10 +900,10 @@ define('magcore/utils/application',[], function () {
   return appUtils;
 });
 
-define('magcore/widgets/templates/layer-list.html',[],function () { return '<div>\r\n  <span class="layersTitle">Select any of the items from\r\n    the list below to add to the map.</span>\r\n  <div data-dojo-attach-point="layerList"></div>\r\n</div>';});
+define('magcore/widgets/templates/layer-list.html',[],function () { return '<div>\r\n  <span class="layers-title">Select any of the items from\r\n    the list below to add to the map.</span>\r\n  <div data-dojo-attach-point="layerList"></div>\r\n</div>';});
 
 
-define('magcore/widgets/templates/layer-list-item.html',[],function () { return '<div class="checkbox-div" data-dojo-attach-event="onclick:toggle">\r\n  <input type="checkbox" ${checkedAttrSetting} data-layer-id="${layerId}"\r\n    class="regular-checkbox big-checkbox" />\r\n  <label></label>\r\n  <label class="layerLabel">${title}</label>\r\n  <a style="height: 25px;" tabindex="0" role="button" data-html="true" data-toggle="popover" data-placement="auto"\r\n    data-trigger="hover" title="${title}" data-content="${definition}"><i class="fas fa-info-circle"></i>\r\n  </a>\r\n</div>';});
+define('magcore/widgets/templates/layer-list-item.html',[],function () { return '<div class="checkbox-div" data-dojo-attach-event="onclick:toggle">\r\n  <input type="checkbox" ${checkedAttrSetting} data-layer-id="${layerId}"\r\n    class="regular-checkbox big-checkbox" />\r\n  <label></label>\r\n  <label class="layer-label">${title}</label>\r\n  <a style="height: 25px;" tabindex="0" role="button" data-html="true" data-toggle="popover" data-placement="auto"\r\n    data-trigger="hover" title="${title}" data-content="${definition}"><i class="fas fa-info-circle"></i>\r\n  </a>\r\n</div>';});
 
 define('magcore/widgets/layer-list',[
   "./templates/layer-list.html",
@@ -977,7 +977,10 @@ define('magcore/widgets/layer-list',[
   var LayerListItem = declare([_WidgetBase, _TemplatedMixin],
     /** @lends LayerListItem.prototype */
     {
-      /** @inheritdoc */
+      /** A string that represents the widget template.
+       * @type {String}
+       * @default
+       */
       templateString: itemTemplate,
       /** Instantiates a new layer list item.
        * @param {Object} options - Configuration options for the item.
@@ -987,6 +990,8 @@ define('magcore/widgets/layer-list',[
        * @param {(Boolean|Object)} options.legend - Whether to display a legend for the item.
        * @param {String} options.definition - A description of the layer that will display in a popover.
        * @param {external:Map} options.map - The map instance associated with this layer.
+       * @param {(String|external:HTMLElement)} domNode - The ID or node representing the DOM element 
+       * that will contain the widget.
        */
       constructor: function ({ id, visible, title, legend, definition, map }, domNode) {
       },      

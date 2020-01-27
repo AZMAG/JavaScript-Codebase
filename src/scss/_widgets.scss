@@ -1,0 +1,70 @@
+@import "variables";
+
+@mixin widgets() {
+  .mag-layer-list {
+    .layers-title {
+      margin: 10px 5px 10px 5px;
+      font-weight: bold;
+      font-size: 0.95em;
+    }
+
+    .checkbox-div {
+      border-radius: 5px;
+      padding: 4px;
+      border-color: #1d1d1d;
+      display: flex;
+      align-items: center;
+      margin: 1px;
+
+      &:hover {
+        background-color: #eee;
+        border-color: #1f1f1f;
+        cursor: pointer;
+      }
+    }
+
+    .regular-checkbox {
+      display: none;
+      &:hover {
+        cursor: pointer;
+      }
+      &+label {
+        border: 1px solid #cacece;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0 -15px 10px -12px rgba(0, 0, 0, 0.05);
+        padding: 9px;
+        border-radius: 3px;
+        display: inline-block;
+        position: relative;
+      }
+
+      &:checked+label {
+        background-color: var(--secondaryColor);
+        border: 1px solid #adb8c0;
+        color: #000;
+
+        &:after {
+          content: '\2714';
+          font-size: 0.625em;
+          position: absolute;
+          top: 0;
+          left: 3px;
+          color: var(--textColor);
+        }
+      }
+    }
+
+    .big-checkbox {
+      &+label {
+        padding: 10px;
+      }
+      &:checked+label:after {
+        font-size: 0.95em;
+      }
+    }
+
+    .layer-label {
+      margin-left: 5%;
+      flex: 1;
+    }
+  }
+}

@@ -36,7 +36,7 @@ module.exports = function (grunt) {
         license: grunt.file.read('LICENSE.md'),
         pkg: grunt.file.readJSON('package.json'),
         banner: '/*! <%= pkg.description %>\n *\n' +
-            ' * <%= pkg.name %> v<%= pkg.version %> (<%= pkg.repository.url %>)\n' +
+            ' * <%= pkg.name %> v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
             ' * <%= license %>\n' +
             ' */\n',
         usebanner: {

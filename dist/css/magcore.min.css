@@ -1,9 +1,9 @@
 /*! The MAG Core JavaScript library for utilization within the MAG suite of mapping applications.
  *
- * magcore v0.0.1 (git+https://github.com/AZMAG/map-mag-core-js.git)
+ * magcore v0.0.1 (https://github.com/AZMAG/map-mag-core-js)
  * The MIT License (MIT)
 
-Copyright (c) 2019 Maricopa Association of Governments
+Copyright (c) 2020 Maricopa Association of Governments
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,4 +24,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-:root{--main:#081f21;--secondary:#2baab1;--text:#fff;--hover:#535353;--hover-text:#fff;--font-family-sans-serif:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}body{font-family:Poppins,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:1em}
+@charset "UTF-8";:root{--main:#081f21;--secondary:#2baab1;--text:#fff;--hover:#535353;--hover-text:#fff;--font-family-sans-serif:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";--font-family-monospace:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}body{font-family:Poppins,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:1em}.mag-layer-list .layers-title{margin:10px 5px 10px 5px;font-weight:700;font-size:.95em}.mag-layer-list .checkbox-div{border-radius:5px;padding:4px;border-color:#1d1d1d;display:flex;align-items:center;margin:1px}.mag-layer-list .checkbox-div:hover{background-color:#eee;border-color:#1f1f1f;cursor:pointer}.mag-layer-list .regular-checkbox{display:none}.mag-layer-list .regular-checkbox:hover{cursor:pointer}.mag-layer-list .regular-checkbox+label{border:1px solid #cacece;box-shadow:0 1px 2px rgba(0,0,0,.05),inset 0 -15px 10px -12px rgba(0,0,0,.05);padding:9px;border-radius:3px;display:inline-block;position:relative}.mag-layer-list .regular-checkbox:checked+label{background-color:var(--secondaryColor);border:1px solid #adb8c0;color:#000}.mag-layer-list .regular-checkbox:checked+label:after{content:"✔";font-size:.625em;position:absolute;top:0;left:3px;color:var(--textColor)}.mag-layer-list .big-checkbox+label{padding:10px}.mag-layer-list .big-checkbox:checked+label:after{font-size:.95em}.mag-layer-list .layer-label{margin-left:5%;flex:1}
