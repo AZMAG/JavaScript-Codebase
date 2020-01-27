@@ -15,6 +15,12 @@ define([], function () {
     return magCore;
 });
 
+// ************************** HTML **********************************
+/**
+ * @external HTMLElement
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement|HTMLElement}
+ */
+
 // ********************** ESRI externals ****************************
 /**
  * @external FeatureLayer
