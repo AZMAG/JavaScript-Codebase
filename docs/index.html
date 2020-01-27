@@ -27,7 +27,7 @@
 
 <nav >
     
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-magcore_main.html">magcore/main</a></li><li><a href="module-magcore_utils_formatter.html">magcore/utils/formatter</a><ul class='methods'><li data-type='method'><a href="module-magcore_utils_formatter.html#.chartTooltip">chartTooltip</a></li><li data-type='method'><a href="module-magcore_utils_formatter.html#.numberWithCommas">numberWithCommas</a></li><li data-type='method'><a href="module-magcore_utils_formatter.html#.qs">qs</a></li><li data-type='method'><a href="module-magcore_utils_formatter.html#.wrapText">wrapText</a></li></ul></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-magcore_main.html">magcore/main</a></li><li><a href="module-magcore_resources_color-ramps.html">magcore/resources/color-ramps</a></li><li><a href="module-magcore_utils_application.html">magcore/utils/application</a><ul class='methods'><li data-type='method'><a href="module-magcore_utils_application.html#.hexToRgb">hexToRgb</a></li><li data-type='method'><a href="module-magcore_utils_application.html#.hideLoading">hideLoading</a></li><li data-type='method'><a href="module-magcore_utils_application.html#.rgbToHex">rgbToHex</a></li><li data-type='method'><a href="module-magcore_utils_application.html#.showLoading">showLoading</a></li></ul></li><li><a href="module-magcore_utils_charts.html">magcore/utils/charts</a><ul class='methods'><li data-type='method'><a href="module-magcore_utils_charts.html#.createChartParams">createChartParams</a></li><li data-type='method'><a href="module-magcore_utils_charts.html#.getCategories">getCategories</a></li></ul></li><li><a href="module-magcore_utils_data.html">magcore/utils/data</a><ul class='methods'><li data-type='method'><a href="module-magcore_utils_data.html#.query">query</a></li></ul></li><li><a href="module-magcore_utils_formatter.html">magcore/utils/formatter</a><ul class='methods'><li data-type='method'><a href="module-magcore_utils_formatter.html#.chartTooltip">chartTooltip</a></li><li data-type='method'><a href="module-magcore_utils_formatter.html#.numberWithCommas">numberWithCommas</a></li><li data-type='method'><a href="module-magcore_utils_formatter.html#.numLabel">numLabel</a></li><li data-type='method'><a href="module-magcore_utils_formatter.html#.pctLabel">pctLabel</a></li><li data-type='method'><a href="module-magcore_utils_formatter.html#.qs">qs</a></li><li data-type='method'><a href="module-magcore_utils_formatter.html#.wrapText">wrapText</a></li></ul></li><li><a href="module-magcore_utils_maps.html">magcore/utils/maps</a><ul class='methods'><li data-type='method'><a href="module-magcore_utils_maps.html#.colorRampToHTML">colorRampToHTML</a></li><li data-type='method'><a href="module-magcore_utils_maps.html#.getActiveMapData">getActiveMapData</a></li><li data-type='method'><a href="module-magcore_utils_maps.html#.getColorRamp">getColorRamp</a></li><li data-type='method'><a href="module-magcore_utils_maps.html#.getCurrentMapsParams">getCurrentMapsParams</a></li><li data-type='method'><a href="module-magcore_utils_maps.html#.getRampsByNumAndType">getRampsByNumAndType</a></li></ul></li><li><a href="module-magcore_utils_reports.html">magcore/utils/reports</a><ul class='methods'><li data-type='method'><a href="module-magcore_utils_reports.html#.getReportData">getReportData</a></li><li data-type='method'><a href="module-magcore_utils_reports.html#.getSelectedReport">getSelectedReport</a></li></ul></li></ul><h3>Externals</h3><ul><li><a href="external-FeatureLayer.html">FeatureLayer</a></li><li><a href="external-Geometry.html">Geometry</a></li><li><a href="external-jQuery.html">jQuery</a></li><li><a href="external-QueryTask.html">QueryTask</a></li></ul>
 </nav>
 
 <div id="main">
@@ -58,7 +58,39 @@
 
     <section class="readme">
         <article><h1>magcore.js</h1>
-<p>MAG repo for JavaScript codebase to help in project development</p></article>
+<p>MAG repo for JavaScript codebase to help in project development</p>
+<h2>Getting Started</h2>
+<p>The following dependencies are required to build this application (if you already have Git, NodeJS, and Grunt you can clone the repo and skip to installing dependencies):</p>
+<ol>
+<li>
+<p>Installation</p>
+<ul>
+<li>Git - download and install for you environment <a href="http://git-scm.com/">here</a>.</li>
+<li>NodeJS - download and install for your environment <a href="http://nodejs.org/">here</a>.</li>
+<li>Sass - <code>npm install -g sass</code></li>
+</ul>
+</li>
+<li>
+<p>Application Dependencies</p>
+<pre class="prettyprint source"><code>npm install
+</code></pre>
+</li>
+</ol>
+<h2>Build</h2>
+<h2>Test</h2>
+<p>Tests include both functional and unit tests.</p>
+<h3>Setup</h3>
+<p>Install the <a href="https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html">JRE</a> or <a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">JDK</a>. Selenium requires Java to run WebDriver tests.</p>
+<p>Chrome will need to be at version 78 or higher.</p>
+<h3>Running the tests locally</h3>
+<p>Once installed, intern tests may be tested with a <code>grunt</code> script issued
+from the root of the repository. To run the unit and functional test suites in headless chrome, run the
+following command:</p>
+<pre class="prettyprint source"><code>grunt test
+</code></pre>
+<h3>Writing tests</h3>
+<p>For information on how to write Intern tests, see
+https://theintern.io/docs.html#Intern/4/docs/docs%2Fwriting_tests.md.</p></article>
     </section>
 
 
