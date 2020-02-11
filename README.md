@@ -2,6 +2,13 @@
 
 MAG repo for JavaScript codebase to help in project development
 
+[![GitHub version](https://badge.fury.io/gh/AZMAG%2fmap-mag-core-js.svg)](https://badge.fury.io/gh/AZMAG%2fmap-mag-core-js)
+[![GitHub issues](https://img.shields.io/github/issues/AZMAG/map-mag-core-js.svg)](https://github.com/AZMAG/map-mag-core-js/issues)
+[![dependencies](https://david-dm.org/AZMAG/map-mag-core-js.png)](https://david-dm.org/AZMAG/map-mag-core-js)
+[![devDependency Status](https://david-dm.org/AZMAG/map-mag-core-js/dev-status.png)](https://david-dm.org/AZMAG/map-mag-core-js)
+[![Built with Grunt](http://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 ## Getting Started
 
 The following dependencies are required to build this application (if you already have Git, NodeJS, and Grunt you can clone the repo and skip to installing dependencies):

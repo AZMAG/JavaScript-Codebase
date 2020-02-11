@@ -1,6 +1,6 @@
 {
   "name": "magcore",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "The MAG Core JavaScript library for utilization within the MAG suite of mapping applications.",
   "homepage": "https://github.com/AZMAG/map-mag-core-js",
   "browser": "dist/js/magcore.js",
