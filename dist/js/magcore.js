@@ -41,11 +41,16 @@ define('magcore/main',[], function () {
     version: '0.0.1'
   };
   return magCore;
-}); // ************************** HTML **********************************
+}); // ************************** HTML/JS ********************************
 
 /**
  * @external HTMLElement
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement|HTMLElement}
+ */
+
+/**
+ * @external Promise
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}
  */
 // ********************** ESRI externals ****************************
 
@@ -624,16 +629,16 @@ define('magcore/utils/formatter',[], function () {
     },
 
     /** Formats a value as a percentage. 
-     * @param {Number} val - The value to format.
-     * @returns {String} A formatted label.
+     * @param {number} val - The value to format.
+     * @returns {string} A formatted label.
      */
     pctLabel: function pctLabel(val) {
       return (Math.round(val * 1000) / 10).toLocaleString("en-US");
     },
 
     /** Formats a value as a whole number.
-     * @param {Number} val - The value to format.
-     * @returns {String} A formatted label.
+     * @param {number} val - The value to format.
+     * @returns {string} A formatted label.
      */
     numLabel: function numLabel(val) {
       return Math.round(val).toLocaleString("en-US");
@@ -651,14 +656,15 @@ define('magcore/utils/charts',["magcore/utils/formatter"], function (formatter) 
    */
   var chartUtils = {
     /** Creates parameters for generating charts.
-     * @param {Object} options - Options for generating parameters.
-     * @param {Object[]} options.data - An array of data objects.
-     * @param {String} options.target - The ID of an HTML element to place the chart.
-     * @param {String} options.type - The chart type.
-     * @param {String} options.category - The chart category.
-     * @param {Object[]} [options.compareData] - An array of data objects for comparison.
-     * @param {String[]} [options.names] - An array of names labeling the chart series.
-     * @param {String[]} seriesColors - An array of hex color values.
+     * @param {object} options - Options for generating parameters.
+     * @param {object[]} options.data - An array of data objects.
+     * @param {string} options.target - The ID of an HTML element to place the chart.
+     * @param {string} options.type - The chart type.
+     * @param {string} options.category - The chart category.
+     * @param {object[]} [options.compareData] - An array of data objects for comparison.
+     * @param {string[]} [options.names] - An array of names labeling the chart series.
+     * @param {string[]} seriesColors - An array of hex color values.
+     * @returns {object} An object containing the chart parameters.
      */
     createChartParams: function createChartParams(options, seriesColors) {
       var series = [{
@@ -743,7 +749,8 @@ define('magcore/utils/charts',["magcore/utils/formatter"], function (formatter) 
     },
 
     /** Gets chart categories based on the input data.
-     * @param {Object[]} data - An arra of data objects.
+     * @param {object[]} data - An arra of data objects.
+     * @returns {string[]} An array of category names.
      */
     getCategories: function getCategories(data) {
       return data.reduce(function (categories, d) {
@@ -771,13 +778,14 @@ define('magcore/utils/data',["esri/tasks/QueryTask"], function (QueryTask) {
    */
   var dataUtils = {
     /** Executes a query against the specified layer or query task.
-     * @param {(external:FeatureLayer|String)} layer - The layer to query or a URL to a queryable layer.
-     * @param {Object} [query] - An optional query specifying the options to pass to the layer query.
-     * @param {Object} [options] - Additional options for the query as described below.
-     * @param {Boolean} [options.attributesOnly=false] - If specified, indicates whether to return just the attributes
+     * @param {(external:FeatureLayer|string)} layer - The layer to query or a URL to a queryable layer.
+     * @param {object} [query] - An optional query specifying the options to pass to the layer query.
+     * @param {object} [options] - Additional options for the query as described below.
+     * @param {boolean} [options.attributesOnly=false] - If specified, indicates whether to return just the attributes
      * of the features or the features themselves. Only valid if `queryForCount` is false.
-     * @param {Boolean} [options.countOnly=false] - If specified, indicates whether to return the count of
+     * @param {boolean} [options.countOnly=false] - If specified, indicates whether to return the count of
      * records matching the query. Only valid if `attributesOnly` is false.
+     * @returns {external:Promise} A promise that resolves to either a FeatureSet, an array of attributes, or the count.
      */
     query: function () {
       var _query2 = _asyncToGenerator(
@@ -927,18 +935,18 @@ define('magcore/utils/reports',["./data"], function (dataUtils) {
 
   var reportUtils = {
     /** Retrieves the currently selected report and it's data.
-     * @returns {Object} The selected report.
+     * @returns {object} The selected report.
      */
     getSelectedReport: function getSelectedReport() {
       return current;
     },
 
     /** Gets report data using the specified IDs.
-     * @param {String} serviceUrl - The URL to the feature service containing the ACS and Census layers.
-     * @param {Object} options - The specific options for the report which should include the following indices.
-     * @param {Number} options.ACSIndex - The index of the ACS layer.
-     * @param {Number} options.CensusIndex - The index of the Census layer.
-     * @param {String[]} geoIds - An array of IDs for which to query.
+     * @param {string} serviceUrl - The URL to the feature service containing the ACS and Census layers.
+     * @param {object} options - The specific options for the report which should include the following indices.
+     * @param {number} options.ACSIndex - The index of the ACS layer.
+     * @param {number} options.CensusIndex - The index of the Census layer.
+     * @param {string[]} geoIds - An array of IDs for which to query.
      * @param {external:Geometry} [geometry] - A geometry to used in the query.
      */
     getReportData: function () {
@@ -1023,15 +1031,15 @@ define('magcore/utils/application',[], function () {
    */
   var appUtils = {
     /** Displays the specified loading element.
-     * @param {String} selector - A jQuery selector specifying the element to display.
-     * @param {String} [display=flex] - Optional CSS display type to use.
+     * @param {string} selector - A jQuery selector specifying the element to display.
+     * @param {string} [display=flex] - Optional CSS display type to use.
      */
     showLoading: function showLoading(selector, display) {
       $(selector).addClass("d-".concat(display || "flex"));
     },
 
     /** Hides the specified loading element.
-     * @param {String} selector - A jQuery selector specifying the element to hide.
+     * @param {string} selector - A jQuery selector specifying the element to hide.
      */
     hideLoading: function hideLoading(selector) {
       $(selector).removeClass(function (i, className) {
@@ -1041,8 +1049,8 @@ define('magcore/utils/application',[], function () {
     },
 
     /** Converts a hex color code to it's equivalent RGB value.
-     * @param {String} hex - The hex code to convert.
-     * @returns {Object} An object with `r`, `g`, and `b` values.
+     * @param {string} hex - The hex code to convert.
+     * @returns {object} An object with `r`, `g`, and `b` values.
      */
     hexToRgb: function hexToRgb(hex) {
       // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
@@ -1059,10 +1067,10 @@ define('magcore/utils/application',[], function () {
     },
 
     /** Converts RGB values to a hex color code.
-     * @param {Number} r - The `red` value.
-     * @param {Number} g - The `green` value.
-     * @param {Number} b - The `blue` value.
-     * @returns {String} The hex color code.
+     * @param {number} r - The `red` value.
+     * @param {number} g - The `green` value.
+     * @param {number} b - The `blue` value.
+     * @returns {string} The hex color code.
      */
     rgbToHex: function rgbToHex(r, g, b) {
       return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
