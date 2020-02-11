@@ -73,7 +73,8 @@ body {
   position: relative;
 }
 .mag-layer-list .regular-checkbox:checked + label {
-  background-color: var(--secondaryColor);
+  background-color: #2baab1;
+  background-color: var(--secondary);
   border: 1px solid #adb8c0;
   color: #000;
 }
@@ -83,7 +84,8 @@ body {
   position: absolute;
   top: 0;
   left: 3px;
-  color: var(--textColor);
+  color: #fff;
+  color: var(--text);
 }
 .mag-layer-list .big-checkbox + label {
   padding: 10px;
@@ -95,5 +97,3 @@ body {
   margin-left: 5%;
   flex: 1;
 }
-
-/*# sourceMappingURL=main.css.map */
