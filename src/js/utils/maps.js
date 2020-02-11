@@ -11,10 +11,10 @@ define([
      */
     var mapUtils = {
         /** Gets a specific color ramp.
-         * @param {String} type - The color ramp type, either `sequential` or `diverging`.
-         * @param {String} rampKey - The specific color ramp key.
-         * @param {String} numBreaks - The number of class breaks for the color ramp.
-         * @returns {Object[]} An array of objects containing `r`, `g`, `b` key-value pairs.
+         * @param {string} type - The color ramp type, either `sequential` or `diverging`.
+         * @param {string} rampKey - The specific color ramp key.
+         * @param {string} numBreaks - The number of class breaks for the color ramp.
+         * @returns {object[]} An array of objects containing `r`, `g`, `b` key-value pairs.
          */
         getColorRamp: function (type, rampKey, numBreaks) {
             const ramps = this.getRampsByNumAndType(type, numBreaks);
@@ -31,9 +31,9 @@ define([
             return rtnRamp;
         },
         /** Gets all of the color ramps of a specific type.
-         * @param {String} type - The color ramp type, either `sequential` or `diverging`.
-         * @param {String} numBreaks - The number of class breaks for the color ramp. 
-         * @returns {Object} An object containing all available color ramps by key.
+         * @param {string} type - The color ramp type, either `sequential` or `diverging`.
+         * @param {string} numBreaks - The number of class breaks for the color ramp. 
+         * @returns {object} An object containing all available color ramps by key.
          */
         getRampsByNumAndType: function (type, numBreaks) {
             let classBreakSet = colorRamps[type]["classBreakSets"][numBreaks];
@@ -54,10 +54,10 @@ define([
             return returnRamps;
         },
         /** Converts a color ramp array to HTML.
-         * @param {Object[]} ramp - The color ramp array to convert.
-         * @param {String} rampKey - The color ramp key.
-         * @param {String} rampType - The color ramp type.
-         * @returns {String} A string containing the HTML.
+         * @param {object[]} ramp - The color ramp array to convert.
+         * @param {string} rampKey - The color ramp key.
+         * @param {string} rampType - The color ramp type.
+         * @returns {string} A string containing the HTML.
          */
         colorRampToHTML: function (ramp, rampKey, rampType) {
             let html = `<div data-type="${rampType}" data-id="${rampKey}" class="cRamp">`;

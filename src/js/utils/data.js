@@ -9,13 +9,14 @@ define([
      */
     var dataUtils = {
         /** Executes a query against the specified layer or query task.
-         * @param {(external:FeatureLayer|String)} layer - The layer to query or a URL to a queryable layer.
-         * @param {Object} [query] - An optional query specifying the options to pass to the layer query.
-         * @param {Object} [options] - Additional options for the query as described below.
-         * @param {Boolean} [options.attributesOnly=false] - If specified, indicates whether to return just the attributes
+         * @param {(external:FeatureLayer|string)} layer - The layer to query or a URL to a queryable layer.
+         * @param {object} [query] - An optional query specifying the options to pass to the layer query.
+         * @param {object} [options] - Additional options for the query as described below.
+         * @param {boolean} [options.attributesOnly=false] - If specified, indicates whether to return just the attributes
          * of the features or the features themselves. Only valid if `queryForCount` is false.
-         * @param {Boolean} [options.countOnly=false] - If specified, indicates whether to return the count of
+         * @param {boolean} [options.countOnly=false] - If specified, indicates whether to return the count of
          * records matching the query. Only valid if `attributesOnly` is false.
+         * @returns {external:Promise} A promise that resolves to either a FeatureSet, an array of attributes, or the count.
          */
         query: async function (layer, query = {
             where: "1=1",

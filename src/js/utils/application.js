@@ -5,22 +5,22 @@ define([], function () {
    */
   var appUtils = {
     /** Displays the specified loading element.
-     * @param {String} selector - A jQuery selector specifying the element to display.
-     * @param {String} [display=flex] - Optional CSS display type to use.
+     * @param {string} selector - A jQuery selector specifying the element to display.
+     * @param {string} [display=flex] - Optional CSS display type to use.
      */
     showLoading: function (selector, display) {
       $(selector).addClass(`d-${display || "flex"}`);
     },
     /** Hides the specified loading element.
-     * @param {String} selector - A jQuery selector specifying the element to hide.
+     * @param {string} selector - A jQuery selector specifying the element to hide.
      */
     hideLoading: function (selector) {
       $(selector).removeClass((i, className) => (className.match(/\bd-\S+/g) || []).join(' '));
       $(selector).addClass("d-none");
     },
     /** Converts a hex color code to it's equivalent RGB value.
-     * @param {String} hex - The hex code to convert.
-     * @returns {Object} An object with `r`, `g`, and `b` values.
+     * @param {string} hex - The hex code to convert.
+     * @returns {object} An object with `r`, `g`, and `b` values.
      */
     hexToRgb: function (hex) {
       // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
@@ -37,10 +37,10 @@ define([], function () {
       } : null;
     },
     /** Converts RGB values to a hex color code.
-     * @param {Number} r - The `red` value.
-     * @param {Number} g - The `green` value.
-     * @param {Number} b - The `blue` value.
-     * @returns {String} The hex color code.
+     * @param {number} r - The `red` value.
+     * @param {number} g - The `green` value.
+     * @param {number} b - The `blue` value.
+     * @returns {string} The hex color code.
      */
     rgbToHex: function (r, g, b) {
       return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
