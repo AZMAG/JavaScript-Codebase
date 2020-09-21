@@ -38,7 +38,7 @@
       }
 
       &:checked+label {
-        background-color: var(--secondaryColor);
+        background-color: var(--secondary);
         border: 1px solid #adb8c0;
         color: #000;
 
@@ -48,7 +48,7 @@
           position: absolute;
           top: 0;
           left: 3px;
-          color: var(--textColor);
+          color: var(--text);
         }
       }
     }

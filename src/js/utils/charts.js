@@ -10,14 +10,15 @@ define([
    */
   var chartUtils = {
     /** Creates parameters for generating charts.
-     * @param {Object} options - Options for generating parameters.
-     * @param {Object[]} options.data - An array of data objects.
-     * @param {String} options.target - The ID of an HTML element to place the chart.
-     * @param {String} options.type - The chart type.
-     * @param {String} options.category - The chart category.
-     * @param {Object[]} [options.compareData] - An array of data objects for comparison.
-     * @param {String[]} [options.names] - An array of names labeling the chart series.
-     * @param {String[]} seriesColors - An array of hex color values.
+     * @param {object} options - Options for generating parameters.
+     * @param {object[]} options.data - An array of data objects.
+     * @param {string} options.target - The ID of an HTML element to place the chart.
+     * @param {string} options.type - The chart type.
+     * @param {string} options.category - The chart category.
+     * @param {object[]} [options.compareData] - An array of data objects for comparison.
+     * @param {string[]} [options.names] - An array of names labeling the chart series.
+     * @param {string[]} seriesColors - An array of hex color values.
+     * @returns {object} An object containing the chart parameters.
      */
     createChartParams: function (options, seriesColors) {
       let series = [
@@ -102,7 +103,8 @@ define([
       };
     },
     /** Gets chart categories based on the input data.
-     * @param {Object[]} data - An arra of data objects.
+     * @param {object[]} data - An arra of data objects.
+     * @returns {string[]} An array of category names.
      */
     getCategories: function (data) {
       return data.reduce((categories, d) => {

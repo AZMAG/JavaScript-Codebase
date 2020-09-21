@@ -1,6 +1,6 @@
 /*! The MAG Core JavaScript library for utilization within the MAG suite of mapping applications.
  *
- * magcore v0.0.1 (https://github.com/AZMAG/map-mag-core-js)
+ * magcore v0.1.0 (https://github.com/AZMAG/map-mag-core-js)
  * The MIT License (MIT)
 
 Copyright (c) 2020 Maricopa Association of Governments
@@ -24,60 +24,72 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-define('magcore/main',[], function () {
-    /** The global MagCore object. 
- * @exports magcore/main
- * @version 0.0.1
- * @author MAG Regional Analytics Devision <mag@azmag.gov>
- * @see {@link http://www.azmag.gov/About-Us/Divisions/Regional-Analytics-Division}
- */
-    var magCore = {
-        /** The current version of MagCore. 
-         * @type {String}
-         * 
-         */
-        version: '0.0.1'
-    };
-    return magCore;
-});
 
-// ************************** HTML **********************************
+
+define('magcore/main',[], function () {
+  /** The global MagCore object. 
+  * @exports magcore/main
+  * @version 0.1.0
+  * @author MAG Regional Analytics Division <mag@azmag.gov>
+  * @see {@link http://www.azmag.gov/About-Us/Divisions/Regional-Analytics-Division}
+  */
+  var magCore = {
+    /** The current version of MagCore. 
+     * @type {string}
+     * 
+     */
+    version: '0.1.0'
+  };
+  return magCore;
+}); // ************************** HTML/JS ********************************
+
 /**
  * @external HTMLElement
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement|HTMLElement}
  */
 
+/**
+ * @external Promise
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}
+ */
 // ********************** ESRI externals ****************************
+
 /**
  * @external FeatureLayer
  * @see {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html|FeatureLayer}
  */
+
 /** 
  * @external QueryTask
  * @see {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-tasks-QueryTask.html|QueryTask}
  */
+
 /** 
  * @external Geometry
  * @see {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-geometry-Geometry.html|Geometry}
  */
+
 /** 
  * @external Map
  * @see {@link https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html|Map}
  */
-
 // ********************** jQuery externals ****************************
+
 /** jQuery
  * @external jQuery
  * @version 3.4.1
  * @see {@link http://api.jquery.com/Types/#jQuery|jQuery}
  * @author {@link https://github.com/jquery/jquery/blob/master/AUTHORS.txt|JS Foundation and other contributors}
  */
+// ********************** Dojo externals ****************************
 
- // ********************** Dojo externals ****************************
 /** Base class for all Dojo widgets.
  * @external WidgetBase
  * @see {@link https://dojotoolkit.org/reference-guide/1.10/dijit/_WidgetBase.html#dijit-widgetbase|WidgetBase}
- */;
+ */
+;
+
+
 define('magcore/resources/color-ramps',[], function () {
   /** Provides a set of default color ramps.
    * @exports magcore/resources/color-ramps
@@ -538,6 +550,9 @@ define('magcore/resources/color-ramps',[], function () {
   };
   return colorRamps;
 });
+
+
+
 define('magcore/utils/formatter',[], function () {
   Number.prototype.MagFormat = function () {
     return this.toFixed(1);
@@ -546,40 +561,46 @@ define('magcore/utils/formatter',[], function () {
    * @exports magcore/utils/formatter
    * @since 1.0.0
    */
+
+
   var formatter = {
     /** Parses the query string of the current URL for the specified key.
      * @param {string} key - The key for which to retrieve the query string value.
      * @returns {string} The value of the query string key.
      */
-    qs: function (key) {
+    qs: function qs(key) {
       key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+
       var match = location.search.match(new RegExp("[?&]" + key + "=([^&]+)(&|$)"));
       return match && decodeURIComponent(match[1].replace(/\+/g, " "));
     },
+
     /** Adds commas to numbers.
      * @param {number} x - The number to format.
      * @returns {string} The formatted value.
      */
-    numberWithCommas: function (x) {
+    numberWithCommas: function numberWithCommas(x) {
       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
+
     /** Returns a formatted chart tooltip using the input value and category.
      * @param {number} value - The number to include in the tooltip.
      * @param {string} category - The category to display in the tooltip.
      * @returns {string} The formatted value.
      */
-    chartTooltip: function (value, category) {
-      return `${this.numberWithCommas(value)} <r> ${category}`;
+    chartTooltip: function chartTooltip(value, category) {
+      return "".concat(this.numberWithCommas(value), " <r> ").concat(category);
     },
     // TODO: Is this funtion really necessary?
-    valueAxisTemplate: function (value) {
+    valueAxisTemplate: function valueAxisTemplate(value) {
       return this.numberWithCommas(value);
     },
+
     /** Wraps a text value onto separate lines.
      * @param {string} value - The value to wrap.
      * @returns {string} The wrapped value.
      */
-    wrapText: function (value) {
+    wrapText: function wrapText(value) {
       var wrapLength = 12;
       var returnLabel = "";
       var lineLength = 0;
@@ -588,72 +609,72 @@ define('magcore/utils/formatter',[], function () {
         var wordsList = value.split(" ");
         $.each(wordsList, function (index, word) {
           var separator = " ";
+
           if (lineLength >= wrapLength) {
             separator = "\n";
             lineLength = 0;
           }
+
           returnLabel += separator + word;
           lineLength += word.length;
         });
       } else {
         returnLabel = value;
       }
+
       return returnLabel;
     },
-
-    showInThousands: function (value) {
+    showInThousands: function showInThousands(value) {
       console.log(value);
     },
+
     /** Formats a value as a percentage. 
-     * @param {Number} val - The value to format.
-     * @returns {String} A formatted label.
+     * @param {number} val - The value to format.
+     * @returns {string} A formatted label.
      */
-    pctLabel: function (val) {
+    pctLabel: function pctLabel(val) {
       return (Math.round(val * 1000) / 10).toLocaleString("en-US");
     },
+
     /** Formats a value as a whole number.
-     * @param {Number} val - The value to format.
-     * @returns {String} A formatted label.
+     * @param {number} val - The value to format.
+     * @returns {string} A formatted label.
      */
-    numLabel: function (val) {
+    numLabel: function numLabel(val) {
       return Math.round(val).toLocaleString("en-US");
     }
   };
-
   return formatter;
 });
 
-define('magcore/utils/charts',[
-  "magcore/utils/formatter"
-], function (
-  formatter
-) {
+
+
+define('magcore/utils/charts',["magcore/utils/formatter"], function (formatter) {
   /** The charts utility is a helper class containing static methods for working with chart data.
    * @exports magcore/utils/charts
    * @since 1.0.0
    */
   var chartUtils = {
     /** Creates parameters for generating charts.
-     * @param {Object} options - Options for generating parameters.
-     * @param {Object[]} options.data - An array of data objects.
-     * @param {String} options.target - The ID of an HTML element to place the chart.
-     * @param {String} options.type - The chart type.
-     * @param {String} options.category - The chart category.
-     * @param {Object[]} [options.compareData] - An array of data objects for comparison.
-     * @param {String[]} [options.names] - An array of names labeling the chart series.
-     * @param {String[]} seriesColors - An array of hex color values.
+     * @param {object} options - Options for generating parameters.
+     * @param {object[]} options.data - An array of data objects.
+     * @param {string} options.target - The ID of an HTML element to place the chart.
+     * @param {string} options.type - The chart type.
+     * @param {string} options.category - The chart category.
+     * @param {object[]} [options.compareData] - An array of data objects for comparison.
+     * @param {string[]} [options.names] - An array of names labeling the chart series.
+     * @param {string[]} seriesColors - An array of hex color values.
+     * @returns {object} An object containing the chart parameters.
      */
-    createChartParams: function (options, seriesColors) {
-      let series = [
-        {
-          field: "fieldValue",
-          categoryField: "fieldAlias",
-          type: options.compareData ? "bar" : options.type,
-          gap: 0.5,
-          data: options.data,
-          name: options.names ? options.names[0] : undefined
-        }
-      ];
+    createChartParams: function createChartParams(options, seriesColors) {
+      var series = [{
+        field: "fieldValue",
+        categoryField: "fieldAlias",
+        type: options.compareData ? "bar" : options.type,
+        gap: 0.5,
+        data: options.data,
+        name: options.names ? options.names[0] : undefined
+      }];
 
       if (options.compareData) {
         series.push({
@@ -665,6 +686,7 @@ define('magcore/utils/charts',[
           name: options.names ? options.names[1] : undefined
         });
       }
+
       return {
         seriesColors: seriesColors,
         legend: {
@@ -673,18 +695,18 @@ define('magcore/utils/charts',[
             color: "black"
           }
         },
-        series,
+        series: series,
         seriesDefaults: {
           labels: {
             position: "outsideEnd",
             background: "#4D4D4D",
             format: "{0:n}",
             color: "black",
-            template: `#= kendo.format(" {0:P}", percentage) #`
+            template: "#= kendo.format(\" {0:P}\", percentage) #"
           },
           tooltip: {
             visible: true,
-            template: function (item) {
+            template: function template(item) {
               var text = formatter.chartTooltip(item.value, item.category);
               return text + " <br> " + kendo.format("{0:P}", item.percentage);
             }
@@ -701,7 +723,7 @@ define('magcore/utils/charts',[
             rotation: {
               angle: options.type === "column" ? 45 : 0
             },
-            template: function (item) {
+            template: function template(item) {
               var text = formatter.wrapText(item.value);
               return text;
             }
@@ -716,7 +738,7 @@ define('magcore/utils/charts',[
         valueAxis: {
           color: "black",
           labels: {
-            template: function (item) {
+            template: function template(item) {
               var text = formatter.valueAxisTemplate(item.value);
               return text;
             },
@@ -725,14 +747,17 @@ define('magcore/utils/charts',[
         }
       };
     },
+
     /** Gets chart categories based on the input data.
-     * @param {Object[]} data - An arra of data objects.
+     * @param {object[]} data - An arra of data objects.
+     * @returns {string[]} An array of category names.
      */
-    getCategories: function (data) {
-      return data.reduce((categories, d) => {
+    getCategories: function getCategories(data) {
+      return data.reduce(function (categories, d) {
         if (!categories.includes(d.chartCategory) && d.chartCategory !== "") {
           categories.push(d.chartCategory);
         }
+
         return categories;
       }, []);
     }
@@ -740,111 +765,265 @@ define('magcore/utils/charts',[
   return chartUtils;
 });
 
-define('magcore/utils/data',[
-    "esri/tasks/QueryTask"
-], function (
-    QueryTask
-) {
-    /** The data utility is a helper class containing static methods for querying data.
-     * @exports magcore/utils/data
-     * @since 1.0.0
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+define('magcore/utils/data',["esri/tasks/QueryTask"], function (QueryTask) {
+  /** The data utility is a helper class containing static methods for querying data.
+   * @exports magcore/utils/data
+   * @since 1.0.0
+   */
+  var dataUtils = {
+    /** Executes a query against the specified layer or query task.
+     * @param {(external:FeatureLayer|string)} layer - The layer to query or a URL to a queryable layer.
+     * @param {object} [query] - An optional query specifying the options to pass to the layer query.
+     * @param {object} [options] - Additional options for the query as described below.
+     * @param {boolean} [options.attributesOnly=false] - If specified, indicates whether to return just the attributes
+     * of the features or the features themselves. Only valid if `queryForCount` is false.
+     * @param {boolean} [options.countOnly=false] - If specified, indicates whether to return the count of
+     * records matching the query. Only valid if `attributesOnly` is false.
+     * @returns {external:Promise} A promise that resolves to either a FeatureSet, an array of attributes, or the count.
      */
-    var dataUtils = {
-        /** Executes a query against the specified layer or query task.
-         * @param {(external:FeatureLayer|String)} layer - The layer to query or a URL to a queryable layer.
-         * @param {Object} [query] - An optional query specifying the options to pass to the layer query.
-         * @param {Object} [options] - Additional options for the query as described below.
-         * @param {Boolean} [options.attributesOnly=false] - If specified, indicates whether to return just the attributes
-         * of the features or the features themselves. Only valid if `queryForCount` is false.
-         * @param {Boolean} [options.countOnly=false] - If specified, indicates whether to return the count of
-         * records matching the query. Only valid if `attributesOnly` is false.
-         */
-        query: async function (layer, query = {
-            where: "1=1",
-            outFields: ["OBJECTID", "GEOID", "NAME"],
-            returnGeometry: false,
-            distinct: true,
-            orderByFields: "NAME"
-        }, { attributesOnly, countOnly } = { attributesOnly: false, countOnly: false }) {
-            let res;
-            if (typeof layer.queryFeatures === "function") {
-                res = countOnly === true ? await layer.queryFeatureCount(query) : await layer.queryFeatures(query);
-            } else if (typeof layer === "string") {
-                let qt = new QueryTask(layer);
-                res = countOnly === true ? await qt.executeForCount(query) : await qt.execute(query);
-            } else {
-                throw new TypeError(`Invalid parameter for querying data: ${layer}`);
+    query: function () {
+      var _query2 = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(layer) {
+        var _query,
+            _ref,
+            attributesOnly,
+            countOnly,
+            res,
+            qt,
+            _args = arguments;
+
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _query = _args.length > 1 && _args[1] !== undefined ? _args[1] : {
+                  where: "1=1",
+                  outFields: ["OBJECTID", "GEOID", "NAME"],
+                  returnGeometry: false,
+                  distinct: true,
+                  orderByFields: "NAME"
+                };
+                _ref = _args.length > 2 && _args[2] !== undefined ? _args[2] : {
+                  attributesOnly: false,
+                  countOnly: false
+                }, attributesOnly = _ref.attributesOnly, countOnly = _ref.countOnly;
+
+                if (!(typeof layer.queryFeatures === "function")) {
+                  _context.next = 15;
+                  break;
+                }
+
+                if (!(countOnly === true)) {
+                  _context.next = 9;
+                  break;
+                }
+
+                _context.next = 6;
+                return layer.queryFeatureCount(_query);
+
+              case 6:
+                _context.t0 = _context.sent;
+                _context.next = 12;
+                break;
+
+              case 9:
+                _context.next = 11;
+                return layer.queryFeatures(_query);
+
+              case 11:
+                _context.t0 = _context.sent;
+
+              case 12:
+                res = _context.t0;
+                _context.next = 30;
+                break;
+
+              case 15:
+                if (!(typeof layer === "string")) {
+                  _context.next = 29;
+                  break;
+                }
+
+                qt = new QueryTask(layer);
+
+                if (!(countOnly === true)) {
+                  _context.next = 23;
+                  break;
+                }
+
+                _context.next = 20;
+                return qt.executeForCount(_query);
+
+              case 20:
+                _context.t1 = _context.sent;
+                _context.next = 26;
+                break;
+
+              case 23:
+                _context.next = 25;
+                return qt.execute(_query);
+
+              case 25:
+                _context.t1 = _context.sent;
+
+              case 26:
+                res = _context.t1;
+                _context.next = 30;
+                break;
+
+              case 29:
+                throw new TypeError("Invalid parameter for querying data: ".concat(layer));
+
+              case 30:
+                if (!(typeof res === 'number')) {
+                  _context.next = 34;
+                  break;
+                }
+
+                return _context.abrupt("return", res);
+
+              case 34:
+                return _context.abrupt("return", attributesOnly === true ? res.features.map(function (r) {
+                  return r.attributes;
+                }) : res);
+
+              case 35:
+              case "end":
+                return _context.stop();
             }
-            if (typeof res === 'number') {
-                return res;
-            } else {                
-                return attributesOnly === true ? res.features.map(r => r.attributes) : res;
-            }
-        }
-    };
-    return dataUtils;
+          }
+        }, _callee);
+      }));
+
+      function query(_x) {
+        return _query2.apply(this, arguments);
+      }
+
+      return query;
+    }()
+  };
+  return dataUtils;
 });
 
 
-define('magcore/utils/reports',[
-    "./data"
-], function (
-    dataUtils
-) {
-    var current = {};
-    /** The report utility is a helper class containing static methods for querying report data.
-     * @exports magcore/utils/reports
-     * @since 1.0.0
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+define('magcore/utils/reports',["./data"], function (dataUtils) {
+  var current = {};
+  /** The report utility is a helper class containing static methods for querying report data.
+   * @exports magcore/utils/reports
+   * @since 1.0.0
+   */
+
+  var reportUtils = {
+    /** Retrieves the currently selected report and it's data.
+     * @returns {object} The selected report.
      */
-    var reportUtils = {
-        /** Retrieves the currently selected report and it's data.
-         * @returns {Object} The selected report.
-         */
-        getSelectedReport: function () {
-            return current;
-        },
-        /** Gets report data using the specified IDs.
-         * @param {String} serviceUrl - The URL to the feature service containing the ACS and Census layers.
-         * @param {Object} options - The specific options for the report which should include the following indices.
-         * @param {Number} options.ACSIndex - The index of the ACS layer.
-         * @param {Number} options.CensusIndex - The index of the Census layer.
-         * @param {String[]} geoIds - An array of IDs for which to query.
-         * @param {external:Geometry} [geometry] - A geometry to used in the query.
-         */
-        getReportData: async function (serviceUrl, options, geoIds = [], geometry) {
-            let where = "1=1";
-            if (geoIds && geoIds.length > 0) {
-                where = `GEOID IN(${geoIds.map(id => `'${id}'`).join(',')})`;
+    getSelectedReport: function getSelectedReport() {
+      return current;
+    },
+
+    /** Gets report data using the specified IDs.
+     * @param {string} serviceUrl - The URL to the feature service containing the ACS and Census layers.
+     * @param {object} options - The specific options for the report which should include the following indices.
+     * @param {number} options.ACSIndex - The index of the ACS layer.
+     * @param {number} options.CensusIndex - The index of the Census layer.
+     * @param {string[]} geoIds - An array of IDs for which to query.
+     * @param {external:Geometry} [geometry] - A geometry to used in the query.
+     */
+    getReportData: function () {
+      var _getReportData = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee(serviceUrl, options) {
+        var geoIds,
+            geometry,
+            where,
+            q,
+            acsPromise,
+            censusPromise,
+            _ref,
+            _ref2,
+            acsData,
+            censusData,
+            _args = arguments;
+
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                geoIds = _args.length > 2 && _args[2] !== undefined ? _args[2] : [];
+                geometry = _args.length > 3 ? _args[3] : undefined;
+                where = "1=1";
+
+                if (geoIds && geoIds.length > 0) {
+                  where = "GEOID IN(".concat(geoIds.map(function (id) {
+                    return "'".concat(id, "'");
+                  }).join(','), ")");
+                }
+
+                q = {
+                  returnGeometry: true,
+                  outFields: ["*"],
+                  where: where,
+                  geometry: geometry ? geometry : null,
+                  orderByFields: ["GEOID"]
+                };
+                acsPromise = dataUtils.query(serviceUrl + "/" + options.ACSIndex, q);
+                q.returnGeometry = false;
+                censusPromise = dataUtils.query(serviceUrl + "/" + options.CensusIndex, q);
+                _context.next = 10;
+                return Promise.all([acsPromise, censusPromise]);
+
+              case 10:
+                _ref = _context.sent;
+                _ref2 = _slicedToArray(_ref, 2);
+                acsData = _ref2[0];
+                censusData = _ref2[1];
+                current = {
+                  options: options,
+                  acsData: acsData,
+                  censusData: censusData
+                };
+                return _context.abrupt("return", Object.assign({}, this.getSelectedReport()));
+
+              case 16:
+              case "end":
+                return _context.stop();
             }
-            let q = {
-                returnGeometry: true,
-                outFields: ["*"],
-                where: where,
-                geometry: geometry ? geometry : null,
-                orderByFields: ["GEOID"]
-            };
-           
-            let acsPromise = dataUtils.query(serviceUrl + "/" + options.ACSIndex, q);
-            
-            q.returnGeometry = false;
+          }
+        }, _callee, this);
+      }));
 
-            let censusPromise = dataUtils.query(serviceUrl + "/" + options.CensusIndex, q);
+      function getReportData(_x, _x2) {
+        return _getReportData.apply(this, arguments);
+      }
 
-            let [acsData, censusData] = await Promise.all([
-                acsPromise,
-                censusPromise
-            ]);
-            current = {
-                options: options,
-                acsData,
-                censusData
-            };
-            return Object.assign({}, this.getSelectedReport());
-        }
-    };
-
-    return reportUtils;
+      return getReportData;
+    }()
+  };
+  return reportUtils;
 });
+
+
+
 define('magcore/utils/application',[], function () {
   /** The application utility is a helper class containing static methods for general application support.
    * @exports magcore/utils/application
@@ -852,30 +1031,33 @@ define('magcore/utils/application',[], function () {
    */
   var appUtils = {
     /** Displays the specified loading element.
-     * @param {String} selector - A jQuery selector specifying the element to display.
-     * @param {String} [display=flex] - Optional CSS display type to use.
+     * @param {string} selector - A jQuery selector specifying the element to display.
+     * @param {string} [display=flex] - Optional CSS display type to use.
      */
-    showLoading: function (selector, display) {
-      $(selector).addClass(`d-${display || "flex"}`);
+    showLoading: function showLoading(selector, display) {
+      $(selector).addClass("d-".concat(display || "flex"));
     },
+
     /** Hides the specified loading element.
-     * @param {String} selector - A jQuery selector specifying the element to hide.
+     * @param {string} selector - A jQuery selector specifying the element to hide.
      */
-    hideLoading: function (selector) {
-      $(selector).removeClass((i, className) => (className.match(/\bd-\S+/g) || []).join(' '));
+    hideLoading: function hideLoading(selector) {
+      $(selector).removeClass(function (i, className) {
+        return (className.match(/\bd-\S+/g) || []).join(' ');
+      });
       $(selector).addClass("d-none");
     },
+
     /** Converts a hex color code to it's equivalent RGB value.
-     * @param {String} hex - The hex code to convert.
-     * @returns {Object} An object with `r`, `g`, and `b` values.
+     * @param {string} hex - The hex code to convert.
+     * @returns {object} An object with `r`, `g`, and `b` values.
      */
-    hexToRgb: function (hex) {
+    hexToRgb: function hexToRgb(hex) {
       // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
       var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
       hex = hex.replace(shorthandRegex, function (m, r, g, b) {
         return r + r + g + g + b + b;
       });
-
       var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
       return result ? {
         r: parseInt(result[1], 16),
@@ -883,43 +1065,35 @@ define('magcore/utils/application',[], function () {
         b: parseInt(result[3], 16)
       } : null;
     },
+
     /** Converts RGB values to a hex color code.
-     * @param {Number} r - The `red` value.
-     * @param {Number} g - The `green` value.
-     * @param {Number} b - The `blue` value.
-     * @returns {String} The hex color code.
+     * @param {number} r - The `red` value.
+     * @param {number} g - The `green` value.
+     * @param {number} b - The `blue` value.
+     * @returns {string} The hex color code.
      */
-    rgbToHex: function (r, g, b) {
+    rgbToHex: function rgbToHex(r, g, b) {
       return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
     }
   };
+
   function componentToHex(c) {
     var hex = c.toString(16);
     return hex.length === 1 ? "0" + hex : hex;
   }
+
   return appUtils;
 });
+
 
 define('magcore/widgets/templates/layer-list.html',[],function () { return '<div>\r\n  <span class="layers-title">Select any of the items from\r\n    the list below to add to the map.</span>\r\n  <div data-dojo-attach-point="layerList"></div>\r\n</div>';});
 
 
 define('magcore/widgets/templates/layer-list-item.html',[],function () { return '<div class="checkbox-div" data-dojo-attach-event="onclick:toggle">\r\n  <input type="checkbox" ${checkedAttrSetting} data-layer-id="${layerId}"\r\n    class="regular-checkbox big-checkbox" />\r\n  <label></label>\r\n  <label class="layer-label">${title}</label>\r\n  <a style="height: 25px;" tabindex="0" role="button" data-html="true" data-toggle="popover" data-placement="auto"\r\n    data-trigger="hover" title="${title}" data-content="${definition}"><i class="fas fa-info-circle"></i>\r\n  </a>\r\n</div>';});
 
-define('magcore/widgets/layer-list',[
-  "./templates/layer-list.html",
-  "./templates/layer-list-item.html",
-  "dijit/_WidgetBase",
-  "dijit/_TemplatedMixin",
-  "dijit/_WidgetsInTemplateMixin",
-  "dojo/_base/declare"
-], function (
-  template,
-  itemTemplate,
-  _WidgetBase,
-  _TemplatedMixin,
-  _WidgetsInTemplateMixin,
-  declare
-) {
+
+
+define('magcore/widgets/layer-list',["./templates/layer-list.html", "./templates/layer-list-item.html", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dijit/_WidgetsInTemplateMixin", "dojo/_base/declare"], function (template, itemTemplate, _WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin, declare) {
   /** Provides a reusable layer list for toggling layer visibilities.
    * @class LayerList
    * @augments {external:WidgetBase}
@@ -927,46 +1101,55 @@ define('magcore/widgets/layer-list',[
    * @example require(["magcore/widgets/layer-list"], function(LayerList) { // code goes here. });
    */
   var LayerList = declare([_WidgetBase, _TemplatedMixin],
-    /** @lends LayerList.prototype */
-    {
-      /** A string that represents the widget template.
-       * @type {String}
-       * @default
-       */
-      templateString: template,
-      /** Instantiates a new LayerList instance.
-       * @param {Object} options - Configuration options for the list.
-       * @param {Object[]} options.layers - An array of individual layer options.
-       * @param {external:Map} options.map - A map instance containing the layers.
-       * @param {(String|external:HTMLElement)} domNode - The ID or node representing the DOM element 
-       * that will contain the widget.
-       */
-      constructor: function ({ map, layers }, domNode) {
-      },
-      /** Processing after the DOM fragment is created.
-       * Called after the DOM fragment has been created, but not necessarily added to the document. 
-       * Do not include any operations which rely on node dimensions or placement. 
-       */
-      postCreate: function () {
-        this.layers.sort((a, b) => a.layerListOrder - b.layerListOrder);
-        this.layers.forEach(layer => {
-          if (layer.id !== "blockGroups") {
-            var cb = $("<div>");
-            $(this.layerList).append(cb);
-            new LayerListItem(Object.assign({}, layer, { 
-              map: this.map,
-              layerId: layer.id,
-              id: `${layer.id}_CheckBox`
-            }), cb[0]);
-          }
-        });
-      },
-      /** Root CSS class of the widget (ex: dijitTextBox), used to construct CSS classes to indicate widget state.
-       * @type {String}
-       * @default
-       */
-      baseClass: 'mag-layer-list'
-    });
+  /** @lends LayerList.prototype */
+  {
+    /** A string that represents the widget template.
+     * @type {String}
+     * @default
+     */
+    templateString: template,
+
+    /** Instantiates a new LayerList instance.
+     * @param {Object} options - Configuration options for the list.
+     * @param {Object[]} options.layers - An array of individual layer options.
+     * @param {external:Map} options.map - A map instance containing the layers.
+     * @param {(String|external:HTMLElement)} domNode - The ID or node representing the DOM element 
+     * that will contain the widget.
+     */
+    constructor: function constructor(_ref, domNode) {
+      var map = _ref.map,
+          layers = _ref.layers;
+    },
+
+    /** Processing after the DOM fragment is created.
+     * Called after the DOM fragment has been created, but not necessarily added to the document. 
+     * Do not include any operations which rely on node dimensions or placement. 
+     */
+    postCreate: function postCreate() {
+      var _this = this;
+
+      this.layers.sort(function (a, b) {
+        return a.layerListOrder - b.layerListOrder;
+      });
+      this.layers.forEach(function (layer) {
+        if (layer.id !== "blockGroups") {
+          var cb = $("<div>");
+          $(_this.layerList).append(cb);
+          new LayerListItem(Object.assign({}, layer, {
+            map: _this.map,
+            layerId: layer.id,
+            id: "".concat(layer.id, "_CheckBox")
+          }), cb[0]);
+        }
+      });
+    },
+
+    /** Root CSS class of the widget (ex: dijitTextBox), used to construct CSS classes to indicate widget state.
+     * @type {String}
+     * @default
+     */
+    baseClass: 'mag-layer-list'
+  });
   /** Represents a single item in the layer list. Used internally and not meant for 
    * use externally.
    * @class LayerListItem
@@ -974,58 +1157,71 @@ define('magcore/widgets/layer-list',[
    * @since 1.0.0
    * @private
    */
-  var LayerListItem = declare([_WidgetBase, _TemplatedMixin],
-    /** @lends LayerListItem.prototype */
-    {
-      /** A string that represents the widget template.
-       * @type {String}
-       * @default
-       */
-      templateString: itemTemplate,
-      /** Instantiates a new layer list item.
-       * @param {Object} options - Configuration options for the item.
-       * @param {String} options.id - The unique ID of the list item.
-       * @param {String} options.title - The title to display in the list.
-       * @param {Boolean} options.visible - Whether the layer is visible by default.
-       * @param {(Boolean|Object)} options.legend - Whether to display a legend for the item.
-       * @param {String} options.definition - A description of the layer that will display in a popover.
-       * @param {external:Map} options.map - The map instance associated with this layer.
-       * @param {(String|external:HTMLElement)} domNode - The ID or node representing the DOM element 
-       * that will contain the widget.
-       */
-      constructor: function ({ id, visible, title, legend, definition, map }, domNode) {
-      },      
-      /** Processing after the DOM fragment is created.
-       * Called after the DOM fragment has been created, but not necessarily added to the document. 
-       * Do not include any operations which rely on node dimensions or placement. 
-       */
-      postCreate: function () {
-        if (this.legend && this.legend.group) {
-          this.id = this.legend.group.id;
-          this.title = this.legend.group.title;
-        }
-        $("[data-toggle=\"popover\"]", this.domNode).popover();
-      },
-      /** Called after the parameters to the widget have been read-in, but before the widget template is instantiated. 
-       * Especially useful to set properties that are referenced in the widget template. 
-       */
-      postMixInProperties: function () {
-        this.inherited(arguments);
-        this.checkedAttrSetting = this.visible === true ? "checked" : "";
-      },
-      /** Toggles the visibility of the layer. */
-      toggle: function () {        
-        //Toggle Checkbox
-        let cb = $(this.domNode).find(".big-checkbox");
-        let layerId = cb.data("layer-id");
 
-        //Toggle Layer
-        let layer = this.map.findLayerById(layerId);
-        if (layer) {
-          layer.visible = !layer.visible;
-          cb.prop("checked", !cb.prop("checked"));
-        }
+  var LayerListItem = declare([_WidgetBase, _TemplatedMixin],
+  /** @lends LayerListItem.prototype */
+  {
+    /** A string that represents the widget template.
+     * @type {String}
+     * @default
+     */
+    templateString: itemTemplate,
+
+    /** Instantiates a new layer list item.
+     * @param {Object} options - Configuration options for the item.
+     * @param {String} options.id - The unique ID of the list item.
+     * @param {String} options.title - The title to display in the list.
+     * @param {Boolean} options.visible - Whether the layer is visible by default.
+     * @param {(Boolean|Object)} options.legend - Whether to display a legend for the item.
+     * @param {String} options.definition - A description of the layer that will display in a popover.
+     * @param {external:Map} options.map - The map instance associated with this layer.
+     * @param {(String|external:HTMLElement)} domNode - The ID or node representing the DOM element 
+     * that will contain the widget.
+     */
+    constructor: function constructor(_ref2, domNode) {
+      var id = _ref2.id,
+          visible = _ref2.visible,
+          title = _ref2.title,
+          legend = _ref2.legend,
+          definition = _ref2.definition,
+          map = _ref2.map;
+    },
+
+    /** Processing after the DOM fragment is created.
+     * Called after the DOM fragment has been created, but not necessarily added to the document. 
+     * Do not include any operations which rely on node dimensions or placement. 
+     */
+    postCreate: function postCreate() {
+      if (this.legend && this.legend.group) {
+        this.id = this.legend.group.id;
+        this.title = this.legend.group.title;
       }
-    });
+
+      $("[data-toggle=\"popover\"]", this.domNode).popover();
+    },
+
+    /** Called after the parameters to the widget have been read-in, but before the widget template is instantiated. 
+     * Especially useful to set properties that are referenced in the widget template. 
+     */
+    postMixInProperties: function postMixInProperties() {
+      this.inherited(arguments);
+      this.checkedAttrSetting = this.visible === true ? "checked" : "";
+    },
+
+    /** Toggles the visibility of the layer. */
+    toggle: function toggle() {
+      //Toggle Checkbox
+      var cb = $(this.domNode).find(".big-checkbox");
+      var layerId = cb.data("layer-id"); //Toggle Layer
+
+      var layer = this.map.findLayerById(layerId);
+
+      if (layer) {
+        layer.visible = !layer.visible;
+        cb.prop("checked", !cb.prop("checked"));
+      }
+    }
+  });
   return LayerList;
 });
+

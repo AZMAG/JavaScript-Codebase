@@ -66,7 +66,7 @@ module.exports = function (grunt) {
         requirejs: {
             debug: {
                 options: {
-                    baseUrl: './<%=config.src%>/js',
+                    baseUrl: './<%=config.out%>/js',
                     out: './<%=config.out%>/js/<%= pkg.name %>.js',
                     // allow dependencies to be resolved but don't include in output (empty:)
                     paths: paths,
@@ -83,7 +83,7 @@ module.exports = function (grunt) {
             },
             release: {
                 options: {
-                    baseUrl: './<%=config.src%>/js',
+                    baseUrl: './<%=config.out%>/js',
                     // allow dependencies to be resolved but don't include in output (empty:)
                     paths: paths,
                     // but don't include them in the main build
@@ -105,7 +105,31 @@ module.exports = function (grunt) {
                     }
                 }
             }
-        },       
+        },
+        babel: {
+            options: {
+                sourceMaps: false,
+                presets: ["@babel/preset-env"]
+            },
+            release: {
+                files: [{
+                    expand: true,
+                    cwd: "<%=config.src%>/js/",
+                    src: ["**/*.js"],
+                    dest: "<%=config.out%>/js/"
+                }]
+            }
+        },
+        copy: {
+            views: {
+                files: [{
+                    cwd: "<%=config.src%>/js",
+                    src: ["**/*.html"],
+                    dest: "<%=config.out%>/js",
+                    expand: true
+                }]
+            }
+        },
         replace: {
             src: {
                 src: ['./<%=config.src%>/js/main.js'],
@@ -132,8 +156,9 @@ module.exports = function (grunt) {
         },
         clean: {
             release: ['./<%=config.out%>'],
-            debug: ['./<%=config.out%>/css', './<%=config.out%>/js/magcore.*'],
-            docs: ['docs']
+            debug: ['./<%=config.out%>/css', "<%=config.out%>/js/*", './<%=config.out%>/js/magcore.*'],
+            docs: ['docs'],
+            babel: ["<%=config.out%>/js/*", "!<%=config.out%>/js/<%=pkg.name%>*.js"]
         },
         sass: {
             release: {
@@ -151,18 +176,25 @@ module.exports = function (grunt) {
         cssmin: {
             release: {
                 files: {
-                    './<%=config.out%>/css/<%= pkg.name %>.min.css': [                                               
+                    './<%=config.out%>/css/<%= pkg.name %>.min.css': [
                         './<%=config.src%>/css/main.css'
                     ]
                 }
             }
         },
-        concat: {
-            css: {
-                src: [
-                    './<%=config.src%>/css/main.css'
-                ],
-                dest: './<%=config.out%>/css/<%=pkg.name%>.css'
+        postcss: {
+            options: {
+                map: false,
+                processors: [
+                    require('pixrem')(),
+                    require('postcss-preset-env')()
+                ]
+            },
+            dist: {
+                files: {
+                    '<%=config.out%>/css/<%=pkg.name%>.min.css': '<%=config.out%>/css/<%=pkg.name%>.min.css',
+                    '<%=config.out%>/css/<%=pkg.name%>.css': '<%=config.src%>/css/main.css'
+                }
             }
         },
         jsdoc: {
@@ -237,11 +269,11 @@ module.exports = function (grunt) {
         },
         watch: {
             options: {
-                livereload: 35719                
+                livereload: 35719
             },
             source: {
-                files: ['./<%=config.src%>/scss/**/*.{scss,sass}', './<%=config.src%>/js/**/*.js', './<%=config.src%>/js/**/*.html',                
-                './demo/css/**/*.css', './demo/js/**/*.js', './demo/js/**/*.html', './demo/index.html'],
+                files: ['./<%=config.src%>/scss/**/*.{scss,sass}', './<%=config.src%>/js/**/*.js', './<%=config.src%>/js/**/*.html',
+                    './demo/css/**/*.css', './demo/js/**/*.js', './demo/js/**/*.html', './demo/index.html'],
                 tasks: ['debug']
             },
             docs: {
@@ -254,18 +286,18 @@ module.exports = function (grunt) {
                 hostname: 'localhost',
                 livereload: 35719,
                 base: './'
-            },            
+            },
             demo: {
-                options: {    
-                    port: 8001,                
+                options: {
+                    port: 8001,
                     open: {
                         target: 'http://localhost:8001/demo'
                     }
                 }
             },
             docs: {
-                options: {    
-                    port: 8002,         
+                options: {
+                    port: 8002,
                     open: {
                         target: 'http://localhost:8002/docs'
                     }
@@ -274,26 +306,31 @@ module.exports = function (grunt) {
         }
     })
     grunt.registerTask('debug', [
-        'clean:debug',        
+        'clean:debug',
+        'babel',
+        'copy',
         'requirejs',
+        'clean:babel',
         'replace',
         'sass',
-        'cssmin', 
-        'concat', 
+        'cssmin',
+        'postcss',
         'usebanner'
     ]);
     grunt.registerTask('default', [
-        'intern',
         'clean:release',
+        'babel',
+        'copy',
         'requirejs',
+        'clean:babel',
         'replace',
         'sass',
-        'cssmin', 
-        'concat', 
+        'cssmin',
+        'postcss',
         'usebanner'
     ]);
     grunt.registerTask('demo', [
-        'connect:demo', 
+        'connect:demo',
         'watch:source'
     ]);
     grunt.registerTask('run', ['debug', 'watch:source']);

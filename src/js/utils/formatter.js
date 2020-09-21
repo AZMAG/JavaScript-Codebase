@@ -65,15 +65,15 @@ define([], function () {
       console.log(value);
     },
     /** Formats a value as a percentage. 
-     * @param {Number} val - The value to format.
-     * @returns {String} A formatted label.
+     * @param {number} val - The value to format.
+     * @returns {string} A formatted label.
      */
     pctLabel: function (val) {
       return (Math.round(val * 1000) / 10).toLocaleString("en-US");
     },
     /** Formats a value as a whole number.
-     * @param {Number} val - The value to format.
-     * @returns {String} A formatted label.
+     * @param {number} val - The value to format.
+     * @returns {string} A formatted label.
      */
     numLabel: function (val) {
       return Math.round(val).toLocaleString("en-US");

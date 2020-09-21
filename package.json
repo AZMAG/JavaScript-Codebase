@@ -1,6 +1,6 @@
 {
   "name": "magcore",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "The MAG Core JavaScript library for utilization within the MAG suite of mapping applications.",
   "homepage": "https://github.com/AZMAG/map-mag-core-js",
   "browser": "dist/js/magcore.js",
@@ -41,23 +41,29 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
     "@dojo/loader": "^2.0.0",
-    "docdash": "^1.1.1",
+    "docdash": "^1.2.0",
     "grunt": "^1.0.4",
+    "grunt-babel": "^8.0.0",
     "grunt-banner": "^0.6.0",
     "grunt-bump": "^0.8.0",
     "grunt-contrib-clean": "^2.0.0",
-    "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-connect": "^2.1.0",
+    "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-cssmin": "^3.0.0",
-    "grunt-contrib-requirejs": "^1.0.0",
+    "grunt-contrib-requirejs": "~1.0.0",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-watch": "^1.1.0",
-    "grunt-jsdoc": "^2.4.0",
+    "grunt-jsdoc": "^2.4.1",
+    "grunt-postcss": "^0.9.0",
     "grunt-text-replace": "^0.4.0",
-    "intern": "^4.6.0",
+    "intern": "^4.8.0",
     "load-grunt-tasks": "^5.1.0",
     "matchdep": "^2.0.0",
+    "pixrem": "^5.0.0",
+    "postcss-preset-env": "^6.7.0",
     "requirejs-text": "^2.0.15",
     "uglify-es": "^3.3.9"
   },
@@ -66,5 +72,11 @@
     "grunt-cli": "^1.3.2",
     "jquery": "^3.4.1"
   },
-  "peerDependencies": {}
+  "peerDependencies": {},
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+  ]
 }

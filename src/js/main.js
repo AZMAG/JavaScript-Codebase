@@ -33,10 +33,15 @@ define([], function () {
   return magCore;
 });
 
-// ************************** HTML **********************************
+// ************************** HTML/JS ********************************
 /**
  * @external HTMLElement
  * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement|HTMLElement}
+ */
+
+/**
+ * @external Promise
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise|Promise}
  */
 
 // ********************** ESRI externals ****************************

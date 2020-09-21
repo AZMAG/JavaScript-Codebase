@@ -12,17 +12,17 @@ define([
      */
     var reportUtils = {
         /** Retrieves the currently selected report and it's data.
-         * @returns {Object} The selected report.
+         * @returns {object} The selected report.
          */
         getSelectedReport: function () {
             return current;
         },
         /** Gets report data using the specified IDs.
-         * @param {String} serviceUrl - The URL to the feature service containing the ACS and Census layers.
-         * @param {Object} options - The specific options for the report which should include the following indices.
-         * @param {Number} options.ACSIndex - The index of the ACS layer.
-         * @param {Number} options.CensusIndex - The index of the Census layer.
-         * @param {String[]} geoIds - An array of IDs for which to query.
+         * @param {string} serviceUrl - The URL to the feature service containing the ACS and Census layers.
+         * @param {object} options - The specific options for the report which should include the following indices.
+         * @param {number} options.ACSIndex - The index of the ACS layer.
+         * @param {number} options.CensusIndex - The index of the Census layer.
+         * @param {string[]} geoIds - An array of IDs for which to query.
          * @param {external:Geometry} [geometry] - A geometry to used in the query.
          */
         getReportData: async function (serviceUrl, options, geoIds = [], geometry) {
