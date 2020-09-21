@@ -2,37 +2,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-  <title>MAG JavaScript API Demo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-  <link rel="stylesheet" href="https://js.arcgis.com/4.13/esri/css/main.css" />
-  <link rel="stylesheet" href="../dist/css/magcore.css" />
-  <link rel="stylesheet" href="css/main.css" />
+    <title>MAG JavaScript API Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.13/esri/css/main.css" />
+    <link rel="stylesheet" href="../dist/css/magcore.css" />
+    <link rel="stylesheet" href="css/main.css" />
 </head>
 
 <body>
-  <main>
-    <h1>MAG Core JavaScript Library <small>(<span></span>)</small></h1>
-    <section id="mapDiv"></section>
-  </main>
-  <!-- script imports -->
-  <script>
-    var dojoConfig = {
-      // async: true,
-      packages: [{
-        name: 'app',
-        location: location.pathname.replace(/\/[^/]+$/, '') + './js'
-      }]
-    };
-  </script>
-  <script src="https://js.arcgis.com/4.13/"></script>
-  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="../dist/js/magcore.js"></script>
-  <script type="text/javascript">
-    require(["jquery", "magcore/main", "app/main"], function ($, magcore) {
-      $("h1 > small > span").html(`version ${magcore.version}`);
-    });
-  </script>
+    <main>
+        <h1>MAG Core JavaScript Library <small>(<span></span>)</small></h1>
+        <section id="mapDiv"></section>
+    </main>
+    <!-- script imports -->
+    <script>
+        var dojoConfig = {
+            // async: true,
+            packages: [{
+                name: 'app',
+                location: location.pathname.replace(/\/[^/]+$/, '') + './js'
+            }]
+        };
+    </script>
+    <script src="https://js.arcgis.com/4.13/"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../dist/js/magcore.js"></script>
+    <script type="text/javascript">
+        require(["jquery", "app/main"], function($) {});
+    </script>
 </body>
 
 </html>
